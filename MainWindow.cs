@@ -283,5 +283,10 @@ namespace MsalExample
         {
 
         }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -120,7 +120,7 @@
             SignInButton.Name = "SignInButton";
             SignInButton.Size = new Size(220, 20);
             SignInButton.TabIndex = 0;
-            SignInButton.Text = "&Sign In (if needed) && Call Graph";
+            SignInButton.Text = "&Sign In && Call Graph";
             SignInButton.UseVisualStyleBackColor = true;
             SignInButton.Click += SignInButton_Click;
             // 
@@ -189,7 +189,8 @@
             MaximizeBox = false;
             MinimumSize = new Size(565, 316);
             Name = "MainWindow";
-            Text = "MSAL Windows Forms Sample";
+            Text = "Refer-All Exipre All Passwords";
+            Load += MainWindow_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             GraphResultsPanel.ResumeLayout(false);
