@@ -39,6 +39,10 @@
             SignInCallToActionLabel = new Label();
             GraphResultsPanel = new Panel();
             GraphResultsTextBox = new TextBox();
+            textBox1 = new TextBox();
+            button1 = new Button();
+            textBox2 = new TextBox();
+            button2 = new Button();
             ExitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
@@ -70,7 +74,7 @@
             tableLayoutPanel1.Controls.Add(label2, 0, 0);
             tableLayoutPanel1.Controls.Add(SignOutButton, 2, 0);
             tableLayoutPanel1.Dock = DockStyle.Bottom;
-            tableLayoutPanel1.Location = new Point(0, 291);
+            tableLayoutPanel1.Location = new Point(0, 260);
             tableLayoutPanel1.Margin = new Padding(2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
@@ -115,10 +119,10 @@
             // SignInButton
             // 
             SignInButton.Anchor = AnchorStyles.Top;
-            SignInButton.Location = new Point(230, 10);
+            SignInButton.Location = new Point(14, 11);
             SignInButton.Margin = new Padding(2);
             SignInButton.Name = "SignInButton";
-            SignInButton.Size = new Size(220, 20);
+            SignInButton.Size = new Size(143, 48);
             SignInButton.TabIndex = 0;
             SignInButton.Text = "&Sign In && Call Graph";
             SignInButton.UseVisualStyleBackColor = true;
@@ -154,10 +158,10 @@
             GraphResultsPanel.Controls.Add(label1);
             GraphResultsPanel.Controls.Add(GraphResultsTextBox);
             GraphResultsPanel.Controls.Add(tableLayoutPanel1);
-            GraphResultsPanel.Location = new Point(8, 38);
+            GraphResultsPanel.Location = new Point(8, 69);
             GraphResultsPanel.Margin = new Padding(2);
             GraphResultsPanel.Name = "GraphResultsPanel";
-            GraphResultsPanel.Size = new Size(668, 317);
+            GraphResultsPanel.Size = new Size(668, 286);
             GraphResultsPanel.TabIndex = 1;
             GraphResultsPanel.Visible = false;
             // 
@@ -170,9 +174,44 @@
             GraphResultsTextBox.Name = "GraphResultsTextBox";
             GraphResultsTextBox.ReadOnly = true;
             GraphResultsTextBox.ScrollBars = ScrollBars.Both;
-            GraphResultsTextBox.Size = new Size(659, 273);
+            GraphResultsTextBox.Size = new Size(659, 242);
             GraphResultsTextBox.TabIndex = 1;
             GraphResultsTextBox.TextChanged += GraphResultsTextBox_TextChanged;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(178, 8);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(367, 23);
+            textBox1.TabIndex = 4;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(551, 7);
+            button1.Name = "button1";
+            button1.Size = new Size(110, 23);
+            button1.TabIndex = 5;
+            button1.Text = "Save TenantID";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(178, 36);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(367, 23);
+            textBox2.TabIndex = 6;
+            textBox2.TextChanged += textBox2_TextChanged;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(551, 36);
+            button2.Name = "button2";
+            button2.Size = new Size(110, 23);
+            button2.TabIndex = 7;
+            button2.Text = "Save ClientID";
+            button2.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -180,6 +219,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = ExitButton;
             ClientSize = new Size(685, 386);
+            Controls.Add(button2);
+            Controls.Add(textBox2);
+            Controls.Add(button1);
+            Controls.Add(textBox1);
             Controls.Add(GraphResultsPanel);
             Controls.Add(SignInButton);
             Controls.Add(ExitButton);
@@ -206,5 +249,9 @@
         private Label AccessTokenSourceLabel;
         private Button SignOutButton;
         private TextBox GraphResultsTextBox;
+        private TextBox textBox1;
+        private Button button1;
+        private TextBox textBox2;
+        private Button button2;
     }
 }

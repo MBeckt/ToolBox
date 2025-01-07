@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\MatthewBeckett\\Downloads\\desktop-winforms\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DCC46A2B-706E-403D-958A-788255D08C56}|MsalExample.csproj|C:\\Users\\MatthewBeckett\\Downloads\\desktop-winforms\\mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{DCC46A2B-706E-403D-958A-788255D08C56}|MsalExample.csproj|c:\\users\\matthewbeckett\\downloads\\desktop-winforms\\mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DCC46A2B-706E-403D-958A-788255D08C56}|MsalExample.csproj|solutionrelative:mainwindow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -61,19 +61,11 @@
               "RelativeDocumentMoniker": "MainWindow.cs",
               "ToolTip": "C:\\Users\\MatthewBeckett\\Downloads\\desktop-winforms\\MainWindow.cs",
               "RelativeToolTip": "MainWindow.cs",
-              "ViewState": "AgIAAA8BAAAAAAAAAADwvw8BAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAB4BAAAAAAAAAAAswC8BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-07T12:03:41.021Z",
               "IsPinned": true,
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
             },
             {
               "$type": "Document",
@@ -84,8 +76,7 @@
               "ToolTip": "C:\\Users\\MatthewBeckett\\Downloads\\desktop-winforms\\MsalExample.csproj",
               "RelativeToolTip": "MsalExample.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-01-07T17:26:56.895Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T17:26:56.895Z"
             },
             {
               "$type": "Document",
@@ -97,8 +88,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T17:24:45.037Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T17:24:45.037Z"
             },
             {
               "$type": "Document",
@@ -110,8 +100,7 @@
               "RelativeToolTip": "MsalExample.csproj.user",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
-              "WhenOpened": "2025-01-07T17:24:44.299Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T17:24:44.299Z"
             },
             {
               "$type": "Document",
@@ -123,8 +112,7 @@
               "RelativeToolTip": "MsalExample.csproj.Backup.tmp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-01-07T17:13:04.259Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T17:13:04.259Z"
             },
             {
               "$type": "Document",
@@ -136,8 +124,15 @@
               "RelativeToolTip": "README.md",
               "ViewState": "AgIAAA0AAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-01-07T16:51:53.582Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T16:51:53.582Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
             }
           ]
         }
