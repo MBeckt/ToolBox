@@ -171,7 +171,7 @@ namespace MsalExample
                 // Check for 204 No Content response
                 if (graphResponseMessage.StatusCode == HttpStatusCode.NoContent)
                 {
-                    GraphResultsTextBox.Text += $"User {userId}: Password Successfully Expired\r\n";
+                    GraphResultsTextBox.Text += $"User {userId}: Password Successfully Expired\n";
                 }
                 else
                 {
