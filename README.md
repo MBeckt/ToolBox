@@ -1,51 +1,3 @@
----
-# Metadata required by https://docs.microsoft.com/samples/browse/
-# Metadata properties: https://review.docs.microsoft.com/help/contribute/samples/process/onboarding?branch=main#add-metadata-to-readme
-languages:
-- csharp
-page_type: sample
-name: Windows Forms app that makes a request to the Graph API after signing in the user
-description: This .NET 8 Windows Forms app signs in the user and then makes a request to Microsoft Graph for the user's profile data.
-products:
-- azure
-- entra-id
-- ms-graph
-urlFragment: ms-identity-docs-code-app-csharp-winforms
----
-
-// Get all users in the tenant
-var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
-var usersResponse = await httpClient.SendAsync(usersRequest);
-usersResponse.EnsureSuccessStatusCode();
-var usersJson = await usersResponse.Content.ReadAsStringAsync();
-var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
-
-// Define the patch content
-var patchContent = new StringContent(
-    "{\"jobTitle\": \"New Title\"}",
-    Encoding.UTF8,
-    "application/json"
-);
-
-// Iterate through all users and apply the patch
-foreach (var user in users.EnumerateArray())
-{
-    var userId = user.GetProperty("id").GetString();
-    var patchRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}");
-    patchRequest.Content = patchContent;
-
-    var patchResponse = await httpClient.SendAsync(patchRequest);
-    if (patchResponse.IsSuccessStatusCode)
-    {
-        Console.WriteLine($"Successfully updated user: {userId}");
-    }
-    else
-    {
-        Console.WriteLine($"Failed to update user: {userId}");
-    }
-}
-
-
 # .NET | Windows Forms | user sign-in, protected web API access (Microsoft Graph) | Microsoft identity platform
 
 This .NET Windows Forms application authenticates a user and then makes a request to the Graph API as the authenticated user. The response to the request is presented to the user.
@@ -97,27 +49,8 @@ Run the application by pressing **F5** in Visual Studio.
 The appliction will open allowing you to click the **Sign In (if needed) & Call Graph** button to use the authentication flow.
 
 ![A screenshot of a Windows Forms application guiding the user to click the "Sign In" button.](./app-launch.png)
+![asdasdasasd](./asd.png)
 
 ## About the code
 
 This .NET 8 Windows Forms application presents a button that initiates an authentication flow using the Microsoft Authentication Library (MSAL). The user completes this flow in their default web browser. Upon successful authentication, an HTTP GET request to the Microsoft Graph /me endpoint is issued with the user's access token in the HTTP header. The response from the GET request is then displayed to the user. The MSAL client first looks to its token cache, refreshing if necessary, before acquiring a new access token.
-
-## Reporting problems
-
-### Sample app not working?
-
-If you can't get the sample working, you've checked [Stack Overflow](http://stackoverflow.com/questions/tagged/msal), and you've already searched the issues in this sample's repository, open an issue report the problem.
-
-1. Search the [GitHub issues](../../issues) in the repository - your problem might already have been reported or have an answer.
-1. Nothing similar? [Open an issue](../../issues/new) that clearly explains the problem you're having running the sample app.
-
-### All other issues
-
-> :warning: WARNING: Any issue in this repository _not_ limited to running one of its sample apps will be closed without being addressed.
-For all other requests, see [Support and help options for developers | Microsoft identity platform](https://learn.microsoft.com/entra/identity-platform/developer-support-help-options).
-
-## Contributing
-
-If you'd like to contribute to this sample, see [CONTRIBUTING.MD](/CONTRIBUTING.md).
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
