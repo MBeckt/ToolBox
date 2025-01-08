@@ -28,27 +28,29 @@ Use these settings in your app registration.
 
 ### 2. Open the project in Visual Studio
 
-Next, open the _MsalExamples.csproj_ project in Visual Studio.
+Next, open the _ReferAll Graph Toolbox.csproj_ project in Visual Studio.
 
 ### 3. Update code sample in _MainWindow.cs_ with app registration values
 
 Finally, set the following values in _MainWindow.cs_.
 
-```csharp
+<!--```csharp
 // Enter the tenant ID obtained from the Microsoft Entra admin center
 TenantId = "Enter the client ID obtained from the Microsoft Entra admin center",
 
 // Enter the client ID obtained from the Microsoft Entra admin center
 ClientId = "Enter the tenant ID obtained from the Microsoft Entra admin center"
-```
+```-->
 
 ## Run the application
 
 Run the application by pressing **F5** in Visual Studio.
 
-The appliction will open allowing you to click the **Sign In (if needed) & Call Graph** button to use the authentication flow.
+Enter both the ClientID & TenantID in the fields, where TenantID is the B2C / AD tenant and the Client is the object ID of the application you registered.
 
-![A screenshot of a Windows Forms application guiding the user to click the "Sign In" button.](./app-launch.png)
+The appliction will open allowing you to click the **Expire Passwords** button to use the authentication flow.
+
+![A screenshot of a Windows Forms application guiding the user to click the "Expire Passwords" button.](./app-launch.png)
 
 ## About the code
 
