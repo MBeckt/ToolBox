@@ -124,7 +124,7 @@
             SignInButton.Name = "SignInButton";
             SignInButton.Size = new Size(143, 48);
             SignInButton.TabIndex = 0;
-            SignInButton.Text = "&Sign In && Call Graph";
+            SignInButton.Text = "Reset Passwords";
             SignInButton.UseVisualStyleBackColor = true;
             SignInButton.Click += SignInButton_Click;
             // 
@@ -184,6 +184,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(367, 23);
             textBox1.TabIndex = 4;
+            textBox1.Text = "2fdbaf70-405c-420d-81e6-0d5391cd6245";
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // button1
@@ -202,6 +203,7 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(367, 23);
             textBox2.TabIndex = 6;
+            textBox2.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
             textBox2.TextChanged += textBox2_TextChanged;
             // 
             // button2
@@ -232,7 +234,7 @@
             MaximizeBox = false;
             MinimumSize = new Size(565, 316);
             Name = "MainWindow";
-            Text = "Refer-All Exipre All Passwords";
+            Text = "Refer-All Microsoft Graph Toolbox";
             Load += MainWindow_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();

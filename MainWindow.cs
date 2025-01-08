@@ -35,10 +35,10 @@ namespace MsalExample
                 .CreateWithApplicationOptions(new PublicClientApplicationOptions
                 {
                     // Enter the tenant ID obtained from the Microsoft Entra admin center
-                    TenantId = "2fdbaf70-405c-420d-81e6-0d5391cd6245",
+                    TenantId = textBox1.Text,
 
                     // Enter the client ID obtained from the Microsoft Entra admin center
-                    ClientId = "1be0f404-8ead-476c-bc75-72a6bd2ac06d"
+                    ClientId = textBox2.Text
                 })
                 .WithDefaultRedirectUri() // http://localhost
                 .Build();
