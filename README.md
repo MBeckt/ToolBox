@@ -48,7 +48,7 @@ Run the application by pressing **F5** in Visual Studio.
 
 Enter both the ClientID & TenantID in the fields, where TenantID is the B2C / AD tenant and the Client is the object ID of the application you registered.
 
-The appliction will open allowing you to click the **Expire Passwords** button to use the authentication flow.
+The appliction will open allowing you to click the **Reset Passwords** button to use the authentication flow.
 
 ![A screenshot of a Windows Forms application guiding the user to click the "Expire Passwords" button.](./app-launch.png)
 
