@@ -61,10 +61,11 @@
               "RelativeDocumentMoniker": "MainWindow.cs",
               "ToolTip": "C:\\Users\\MatthewBeckett\\Downloads\\desktop-winforms\\MainWindow.cs",
               "RelativeToolTip": "MainWindow.cs",
-              "ViewState": "AgIAAB4BAAAAAAAAAAAswC8BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-07T12:03:41.021Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

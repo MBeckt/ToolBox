@@ -85,64 +85,6 @@ namespace MsalExample
             }
 
             // Call Microsoft Graph using the access token acquired above.
-            /*
-            using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
-            graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-            var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
-            graphResponseMessage.EnsureSuccessStatusCode();
-            */
-            /*Dictionary<string, string> jsonValues = new Dictionary<string, string>();
-            jsonValues.Add("passwordProfile", "forceChangePasswordNextSignIn");*/
-
-
-
-
-            /*using StringContent payload = new(
-                System.Text.Json.JsonSerializer.Serialize(new
-                {
-                    passwordProfile = new
-                    {
-                        forceChangePasswordNextSignIn = true,
-                    }
-                }),
-                Encoding.UTF8,
-                "application/json");
-            var payloadJSON = JsonConvert.SerializeObject(payload);
-            var graphRequest = new HttpRequestMessage(HttpMethod.Patch, "https://graph.microsoft.com/v1.0/user/66895798-577b-4998-9326-b82a6d092aa4")
-            {
-                Content = new StringContent($"{payloadJSON}", Encoding.UTF8, "application/json")
-            }; // Figure out how to add my fucking content
-
-            graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-
-
-            var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
-            graphResponseMessage.EnsureSuccessStatusCode(); // ERROR 405 | NEED MORE PERMISSIONS // Now ERROR 400!!!!
-           */
-
-
-
-
-
-
-            /*
-            var payload = new { passwordProfile = new { forceChangePasswordNextSignIn = true, } }; 
-            var payloadJSON = System.Text.Json.JsonSerializer.Serialize(payload); 
-            var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/66895798-577b-4998-9326-b82a6d092aa4") 
-                { Content = new StringContent(payloadJSON, Encoding.UTF8, "application/json") }; graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken); var graphResponseMessage = await _httpClient.SendAsync(graphRequest); graphResponseMessage.EnsureSuccessStatusCode();
-
-            // Check for 204 No Content response
-            if (graphResponseMessage.StatusCode == HttpStatusCode.NoContent) 
-                { GraphResultsTextBox.Text = "HTTP Response Code: 204 No Content"; }
-            else 
-                { using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync()); 
-                GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions 
-                    { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });} 
-                var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource; 
-                AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})"; 
-            */
-
-
             // Get all users in the tenant
             var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
             usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
@@ -165,7 +107,6 @@ namespace MsalExample
                     Content = patchContent
                 };
                 graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-
                 var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
 
                 // Check for 204 No Content response
@@ -178,82 +119,14 @@ namespace MsalExample
                     using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
                     GraphResultsTextBox.Text += $"User {userId}: " + System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }) + "\n";
                 }
-
                 var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                 AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
             }
-
-            // Parsing HTTP response code
-            /*var httpResponseCode = (int)usersResponse.StatusCode;
-            GraphResultsTextBox.Text = $"HTTP Response Code: {httpResponseCode}";*/
-
-
-
-
-
-
-
-
-
-
-
-
             // Parsing HTTP response code var httpResponseCode = (int)graphResponseMessage.StatusCode; HttpResponseCodeLabel.Text = $"HTTP Response Code: {httpResponseCode}"
-
-            /* using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
-            var httpResponseCode = (int)graphResponseMessage.StatusCode; GraphResultsTextBox.Text = $"HTTP Response Code: {httpResponseCode}";
-            var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
-            AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
-            */
             // Hide the call to action and show the results.
             SignInCallToActionLabel.Hide();
             GraphResultsPanel.Show();
-
-            // Code snippets are only available for the latest version. Current version is 5.x
-
-            // Dependencies
-
-            /*
-            var scopes = new[] { "User.Read" };
-
-            var tenantId = "2fdbaf70-405c-420d-81e6-0d5391cd6245";
-
-            // Value from app registration
-            var clientId = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
-
-            // using Azure.Identity;
-            var options = new DeviceCodeCredentialOptions
-            {
-                AuthorityHost = AzureAuthorityHosts.AzurePublicCloud,
-                ClientId = clientId,
-                TenantId = tenantId,
-
-                // Callback function that receives the user prompt
-                // Prompt contains the generated device code that user must
-                // enter during the auth process in the browser
-                DeviceCodeCallback = (code, cancellation) =>
-                {
-                    Console.WriteLine(code.Message);
-                    return Task.FromResult(0);
-                },
-            };
-            // https://learn.microsoft.com/dotnet/api/azure.identity.devicecodecredential
-            var deviceCodeCredential = new DeviceCodeCredential(options);
-
-            var graphClient = new GraphServiceClient(deviceCodeCredential, scopes);
-
-
-            var requestBody = new Microsoft.Graph.Models.User
-            {
-                PasswordProfile = new PasswordProfile
-                {
-                    ForceChangePasswordNextSignIn = true,
-                },
-            };
-            // To initialize your graphClient, see https://learn.microsoft.com/en-us/graph/sdks/create-client?from=snippets&tabs=csharp
-            var result = await graphClient.Users["{user-id}"].PatchAsync(requestBody);*/
         }
-
         /// <summary>
         /// Handle the "Sign Out" button click. This will remove all cached tokens from
         /// the MSAL client, resulting in any future usage requiring a reauthentication
