@@ -1,0 +1,44 @@
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\ReferAll Graph Toolbox.exe
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\ReferAll Graph Toolbox.deps.json
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\ReferAll Graph Toolbox.runtimeconfig.json
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\ReferAll Graph Toolbox.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Azure.Core.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Azure.Identity.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Bcl.TimeProvider.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Graph.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Graph.Core.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Identity.Client.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.IdentityModel.Logging.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.IdentityModel.Protocols.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.IdentityModel.Tokens.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.IdentityModel.Validators.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Kiota.Abstractions.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Kiota.Authentication.Azure.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Kiota.Http.HttpClientLibrary.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Kiota.Serialization.Form.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Kiota.Serialization.Json.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Kiota.Serialization.Multipart.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Microsoft.Kiota.Serialization.Text.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Newtonsoft.Json.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\Std.UriTemplate.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\System.ClientModel.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin\Release\net8.0-windows\System.Memory.Data.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ReferAll Graph Toolbox.csproj.AssemblyReference.cache
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\MsalExample.MainWindow.resources
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ReferAll Graph Toolbox.csproj.GenerateResource.cache
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ReferAll Graph Toolbox.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ReferAll Graph Toolbox.AssemblyInfoInputs.cache
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ReferAll Graph Toolbox.AssemblyInfo.cs
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ReferAll Graph Toolbox.csproj.CoreCompileInputs.cache
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ReferAll Graph Toolbox.sourcelink.json
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ReferAll.AB74B61C.Up2Date
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ReferAll Graph Toolbox.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\refint\ReferAll Graph Toolbox.dll
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ReferAll Graph Toolbox.genruntimeconfig.cache
+C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Release\net8.0-windows\ref\ReferAll Graph Toolbox.dll

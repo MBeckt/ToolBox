@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MsalExample")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f06d852bd31d957447fd19fb1bed5e5a2793b97")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+192cb1002b908819fdf6666236d8cbc75ed17bb8")]
 [assembly: System.Reflection.AssemblyProductAttribute("MsalExample")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MsalExample")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
