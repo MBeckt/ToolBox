@@ -12,3 +12,4 @@
 /.vs/MsalExample/FileContentIndex/85d3e636-c53e-40d6-995c-eded6c4b6b54.vsidx
 /.vs/MsalExample/v17/ResourceExplorer/settings.json
 /.vs/MsalExample/FileContentIndex/3f2046ff-b389-4cac-b034-a2d99f0c94e1.vsidx
+*.vsidx
