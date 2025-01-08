@@ -49,7 +49,6 @@ Run the application by pressing **F5** in Visual Studio.
 The appliction will open allowing you to click the **Sign In (if needed) & Call Graph** button to use the authentication flow.
 
 ![A screenshot of a Windows Forms application guiding the user to click the "Sign In" button.](./app-launch.png)
-![asdasdasasd](./asd.png)
 
 ## About the code
 
