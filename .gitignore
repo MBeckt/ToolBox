@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/MsalExample/DesignTimeBuild/.dtbcache.v2
+/.vs/MsalExample/FileContentIndex/436de1d4-cba1-4e46-bec0-53ee7c0f998c.vsidx
+/.vs/MsalExample/FileContentIndex/54ef995c-2312-4948-9ca7-f059837d7601.vsidx
+/.vs/MsalExample/FileContentIndex/b0617846-962f-4618-8cb2-88e085dfd45f.vsidx
+/.vs/MsalExample/FileContentIndex/b46b657f-d789-4137-8c60-237890f100d8.vsidx
+/.vs/MsalExample/FileContentIndex/fc696fff-9731-4350-a59e-f89d0ff54b11.vsidx
+/.vs/MsalExample/FileContentIndex/3e0581d3-8c3a-4600-979d-a97c7dc7c153.vsidx
+/.vs/MsalExample/FileContentIndex/85d3e636-c53e-40d6-995c-eded6c4b6b54.vsidx
+/.vs/MsalExample/v17/ResourceExplorer/settings.json
+/.vs/MsalExample/FileContentIndex/3f2046ff-b389-4cac-b034-a2d99f0c94e1.vsidx
