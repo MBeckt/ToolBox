@@ -24,3 +24,8 @@
 /.vs/slnx.sqlite
 /.vs/slnx.sqlite-journal
 /obj
+/obj/Debug/net9.0-windows7.0/ReferAll Graph Toolbox.AssemblyInfo.cs
+/obj/Debug/net9.0-windows7.0/ReferAll Graph Toolbox.AssemblyInfoInputs.cache
+/obj/Debug/net9.0-windows7.0/ReferAll Graph Toolbox.GeneratedMSBuildEditorConfig.editorconfig
+/bin/Debug/net9.0-windows7.0
+/.vs/slnx.sqlite
