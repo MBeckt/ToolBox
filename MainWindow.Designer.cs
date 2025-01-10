@@ -298,7 +298,9 @@ namespace MsalExample
             // checkBox2
             // 
             checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(102, 26);
+            checkBox2.Checked = true;
+            checkBox2.CheckState = CheckState.Checked;
+            checkBox2.Location = new Point(187, 26);
             checkBox2.Name = "checkBox2";
             checkBox2.RightToLeft = RightToLeft.Yes;
             checkBox2.Size = new Size(139, 19);
@@ -352,14 +354,12 @@ namespace MsalExample
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Checked = true;
-            checkBox1.CheckState = CheckState.Checked;
             checkBox1.Location = new Point(6, 26);
             checkBox1.Name = "checkBox1";
             checkBox1.RightToLeft = RightToLeft.Yes;
-            checkBox1.Size = new Size(71, 19);
+            checkBox1.Size = new Size(157, 19);
             checkBox1.TabIndex = 5;
-            checkBox1.Text = "All Users";
+            checkBox1.Text = "Target All Users in Tenant";
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckStateChanged += checkbox_click;
             // 
