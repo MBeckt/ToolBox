@@ -236,7 +236,7 @@ namespace MsalExample
             button3.TabIndex = 8;
             button3.Text = "Set Tenant to Staging";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += Button4_Click;
+            button3.Click += Button3_Click;
             // 
             // button4
             // 
@@ -246,6 +246,7 @@ namespace MsalExample
             button4.TabIndex = 9;
             button4.Text = "Set Tenant to Production";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += Button4_Click;
             // 
             // groupBox1
             // 
@@ -331,7 +332,6 @@ namespace MsalExample
             textBox4.RightToLeft = RightToLeft.No;
             textBox4.Size = new Size(374, 23);
             textBox4.TabIndex = 3;
-            textBox4.Text = "Not implemented";
             // 
             // checkBox1
             // 

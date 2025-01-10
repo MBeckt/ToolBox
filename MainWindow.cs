@@ -87,48 +87,143 @@ namespace MsalExample
 
             // Call Microsoft Graph using the access token acquired above.
             // Get all users in the tenant
-            var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
-            usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-            var usersResponse = await _httpClient.SendAsync(usersRequest);
-            usersResponse.EnsureSuccessStatusCode();
-            var usersJson = await usersResponse.Content.ReadAsStringAsync();
-            var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
-
-            // Define the payload for the patch request
-            var payload = new { passwordProfile = new { forceChangePasswordNextSignIn = true } };
-            var payloadJSON = System.Text.Json.JsonSerializer.Serialize(payload);
-            var patchContent = new StringContent(payloadJSON, Encoding.UTF8, "application/json");
-
-            // Iterate through all users and apply the patch
-            foreach (var user in users.EnumerateArray())
+            if (checkBox1.Checked == true)
             {
-                var userId = user.GetProperty("id").GetString();
-                var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}")
-                {
-                    Content = patchContent
-                };
-                graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-                var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+                var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
+                usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var usersResponse = await _httpClient.SendAsync(usersRequest);
+                usersResponse.EnsureSuccessStatusCode();
+                var usersJson = await usersResponse.Content.ReadAsStringAsync();
+                var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
 
-                // Check for 204 No Content response
-                if (graphResponseMessage.StatusCode == HttpStatusCode.NoContent)
+                // Define the payload for the patch request
+                var payload = new { passwordProfile = new { forceChangePasswordNextSignIn = true } };
+                var payloadJSON = System.Text.Json.JsonSerializer.Serialize(payload);
+                var patchContent = new StringContent(payloadJSON, Encoding.UTF8, "application/json");
+
+                // Iterate through all users and apply the patch
+                foreach (var user in users.EnumerateArray())
                 {
-                    GraphResultsTextBox.Text += $"User {userId}: Password Successfully Expired\r\n";
+                    var userId = user.GetProperty("id").GetString();
+                    var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}")
+                    {
+                        Content = patchContent
+                    };
+                    graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                    var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+
+                    // Check for 204 No Content response
+                    if (graphResponseMessage.StatusCode == HttpStatusCode.NoContent)
+                    {
+                        GraphResultsTextBox.Text += $"User {userId}: Password Successfully Expired\r\n";
+                    }
+                    else
+                    {
+                        using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                        GraphResultsTextBox.Text += $"User {userId}: " + System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }) + "\n";
+                    }
+                    var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                    AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
                 }
-                else
-                {
-                    using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
-                    GraphResultsTextBox.Text += $"User {userId}: " + System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }) + "\n";
-                }
-                var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
-                AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+                // Parsing HTTP response code var httpResponseCode = (int)graphResponseMessage.StatusCode; HttpResponseCodeLabel.Text = $"HTTP Response Code: {httpResponseCode}"
+                // Hide the call to action and show the results.
+                SignInCallToActionLabel.Hide();
+                GraphResultsPanel.Show();
             }
-            // Parsing HTTP response code var httpResponseCode = (int)graphResponseMessage.StatusCode; HttpResponseCodeLabel.Text = $"HTTP Response Code: {httpResponseCode}"
-            // Hide the call to action and show the results.
-            SignInCallToActionLabel.Hide();
-            GraphResultsPanel.Show();
-        }
+            if (checkBox1.Checked == false)
+            {
+                if (!string.IsNullOrEmpty(textBox3.Text))
+                {
+                    var existingText = textBox3.Text;
+                    //existingText = textBox4.Text;
+                    var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + existingText + "'" + " and id/issuer eq 'ReferallStaging.onmicrosoft')");
+                    usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                    var usersResponse = await _httpClient.SendAsync(usersRequest);
+                    usersResponse.EnsureSuccessStatusCode();
+                    var usersJson = await usersResponse.Content.ReadAsStringAsync();
+                    var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
 
+                    // Define the payload for the patch request
+                    var payload = new { passwordProfile = new { forceChangePasswordNextSignIn = true } };
+                    var payloadJSON = System.Text.Json.JsonSerializer.Serialize(payload);
+                    var patchContent = new StringContent(payloadJSON, Encoding.UTF8, "application/json");
+
+                    // Iterate through all users and apply the patch
+                    foreach (var user in users.EnumerateArray())
+                    {
+                        var userId = user.GetProperty("id").GetString();
+                        var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}")
+                        {
+                            Content = patchContent
+                        };
+                        graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                        var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+
+                        // Check for 204 No Content response
+                        if (graphResponseMessage.StatusCode == HttpStatusCode.NoContent)
+                        {
+                            GraphResultsTextBox.Text += $"User {userId}: Password Successfully Expired\r\n";
+                        }
+                        else
+                        {
+                            using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                            GraphResultsTextBox.Text += $"User {userId}: " + System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }) + "\n";
+                        }
+                        var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                        AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+                        // Parsing HTTP response code var httpResponseCode = (int)graphResponseMessage.StatusCode; HttpResponseCodeLabel.Text = $"HTTP Response Code: {httpResponseCode}"
+                        // Hide the call to action and show the results.
+                        SignInCallToActionLabel.Hide();
+                        GraphResultsPanel.Show();
+                    }
+                }
+                if (!string.IsNullOrEmpty(textBox4.Text))
+                {
+                    var existingText = textBox4.Text;
+                    //existingText = textBox4.Text;
+                    var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users/" + existingText);
+                    usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                    var usersResponse = await _httpClient.SendAsync(usersRequest);
+                    usersResponse.EnsureSuccessStatusCode();
+                    var usersJson = await usersResponse.Content.ReadAsStringAsync();
+                    var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+
+                    // Define the payload for the patch request
+                    var payload = new { passwordProfile = new { forceChangePasswordNextSignIn = true } };
+                    var payloadJSON = System.Text.Json.JsonSerializer.Serialize(payload);
+                    var patchContent = new StringContent(payloadJSON, Encoding.UTF8, "application/json");
+
+                    // Iterate through all users and apply the patch
+                    foreach (var user in users.EnumerateArray())
+                    {
+                        var userId = user.GetProperty("id").GetString();
+                        var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}")
+                        {
+                            Content = patchContent
+                        };
+                        graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                        var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+
+                        // Check for 204 No Content response
+                        if (graphResponseMessage.StatusCode == HttpStatusCode.NoContent)
+                        {
+                            GraphResultsTextBox.Text += $"User {userId}: Password Successfully Expired\r\n";
+                        }
+                        else
+                        {
+                            using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                            GraphResultsTextBox.Text += $"User {userId}: " + System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }) + "\n";
+                        }
+                        var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                        AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+                        // Parsing HTTP response code var httpResponseCode = (int)graphResponseMessage.StatusCode; HttpResponseCodeLabel.Text = $"HTTP Response Code: {httpResponseCode}"
+                        // Hide the call to action and show the results.
+                        SignInCallToActionLabel.Hide();
+                        GraphResultsPanel.Show();
+                    }
+                }
+            }
+        }
         // Find USERS by EMAIL
 
         private async void FindEmailButton_Click(object sender, EventArgs e)
@@ -231,12 +326,12 @@ namespace MsalExample
             if (checkBox1.Checked == true)
             {
                 textBox3.Enabled = false;
-                //textBox4.Enabled = false;
+                textBox4.Enabled = false;
             }
             if (checkBox1.Checked == false)
             {
                 textBox3.Enabled = true;
-                //textBox4.Enabled = true;
+                textBox4.Enabled = true;
             }
 
         }
@@ -253,7 +348,7 @@ namespace MsalExample
         private void Button4_Click(object sender, EventArgs e)
         {
             textBox1.Text = "7fad452f-bb21-4814-9756-a7c7c9bbb90c";
-            textBox2.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
+            textBox2.Text = "2a798ec2-15e3-4dff-bfaa-edb924c1fc91";
         }
 
 
