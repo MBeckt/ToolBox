@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <BaseOutputPath>C:\Users\MatthewBeckett\Downloads\desktop-winforms\bin</BaseOutputPath>
+    <BaseOutputPath></BaseOutputPath>
 	<PublishSingleFile>true</PublishSingleFile>
 	<DebugType>embedded</DebugType>
 	<ApplicationIcon>SAA Wrench128.ico</ApplicationIcon>

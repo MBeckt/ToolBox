@@ -44,6 +44,16 @@ namespace MsalExample
                 .Build();
         }
 
+        
+        public void buttton1_Click(object sender, EventArgs e, ApplicationOptions applicationOptions)
+        {
+            applicationOptions.TenantId = textBox1.Text;
+        }
+        public void button2_Click(object sender, EventArgs e, ApplicationOptions applicationOptions)
+        {
+            applicationOptions.ClientId = textBox2.Text;
+        }
+
         // <summary>
         // Handle the "Sign In" button click. This will acquire an access token scoped to
         // Microsoft Graph, either from the cache or from an interactive session. It will
@@ -127,6 +137,59 @@ namespace MsalExample
             SignInCallToActionLabel.Hide();
             GraphResultsPanel.Show();
         }
+
+        // Find USERS by EMAIL
+
+        private async void FindEmailButton_Click(object sender, EventArgs e)
+        {
+            AuthenticationResult? msalAuthenticationResult = null;
+
+            // Acquire a cached access token for Microsoft Graph if one is available from a prior
+            // execution of this authentication flow.
+            var accounts = await msalPublicClientApp.GetAccountsAsync();
+            if (accounts.Any())
+            {
+                try
+                {
+                    // Will return a cached access token if available, refreshing if necessary.
+                    msalAuthenticationResult = await msalPublicClientApp.AcquireTokenSilent(
+                        new[] { "https://graph.microsoft.com/User.Read" },
+                        accounts.First())
+                        .ExecuteAsync();
+                }
+                catch (MsalUiRequiredException)
+                {
+                    // Nothing in cache for this account + scope, and interactive experience required.
+                }
+            }
+
+            if (msalAuthenticationResult == null)
+            {
+                // This is likely the first authentication request since application start or after
+                // Sign Out was clicked, so calling this will launch the user's default browser and
+                // send them through a login flow. After the flow is complete, the rest of this method
+                // will continue to execute.
+                msalAuthenticationResult = await msalPublicClientApp.AcquireTokenInteractive(
+                    new[] { "https://graph.microsoft.com/User.Read" })
+                    .ExecuteAsync();
+            }
+
+            // Call Microsoft Graph using the access token acquired above.
+            using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/me");
+            graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+            var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+            graphResponseMessage.EnsureSuccessStatusCode();
+
+            // Present the results to the user (formatting the json for readability)
+            using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+            GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+            var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+            AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+
+            // Hide the call to action and show the results.
+            SignInCallToActionLabel.Hide();
+            GraphResultsPanel.Show();
+        }
         /// <summary>
         /// Handle the "Sign Out" button click. This will remove all cached tokens from
         /// the MSAL client, resulting in any future usage requiring a reauthentication
@@ -173,6 +236,16 @@ namespace MsalExample
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SignInCallToActionLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
         {
 
         }

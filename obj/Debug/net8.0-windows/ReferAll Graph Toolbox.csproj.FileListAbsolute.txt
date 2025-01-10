@@ -42,3 +42,13 @@ C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Debug\net8.0-windows\Refe
 C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Debug\net8.0-windows\refint\ReferAll Graph Toolbox.dll
 C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Debug\net8.0-windows\ReferAll Graph Toolbox.genruntimeconfig.cache
 C:\Users\MatthewBeckett\Downloads\desktop-winforms\obj\Debug\net8.0-windows\ref\ReferAll Graph Toolbox.dll
+C:\Users\mrcat\source\repos\MBeckt\Expire-All-Passwords\obj\Debug\net8.0-windows\ReferAll Graph Toolbox.csproj.AssemblyReference.cache
+C:\Users\mrcat\source\repos\MBeckt\Expire-All-Passwords\obj\Debug\net8.0-windows\MsalExample.MainWindow.resources
+C:\Users\mrcat\source\repos\MBeckt\Expire-All-Passwords\obj\Debug\net8.0-windows\ReferAll Graph Toolbox.csproj.GenerateResource.cache
+C:\Users\mrcat\source\repos\MBeckt\Expire-All-Passwords\obj\Debug\net8.0-windows\ReferAll Graph Toolbox.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mrcat\source\repos\MBeckt\Expire-All-Passwords\obj\Debug\net8.0-windows\ReferAll Graph Toolbox.AssemblyInfoInputs.cache
+C:\Users\mrcat\source\repos\MBeckt\Expire-All-Passwords\obj\Debug\net8.0-windows\ReferAll Graph Toolbox.AssemblyInfo.cs
+C:\Users\mrcat\source\repos\MBeckt\Expire-All-Passwords\obj\Debug\net8.0-windows\ReferAll Graph Toolbox.csproj.CoreCompileInputs.cache
+C:\Users\mrcat\source\repos\MBeckt\Expire-All-Passwords\obj\Debug\net8.0-windows\ReferAll Graph Toolbox.sourcelink.json
+C:\Users\mrcat\source\repos\MBeckt\Expire-All-Passwords\obj\Debug\net8.0-windows\ReferAll Graph Toolbox.dll
+C:\Users\mrcat\source\repos\MBeckt\Expire-All-Passwords\obj\Debug\net8.0-windows\refint\ReferAll Graph Toolbox.dll

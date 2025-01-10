@@ -27,7 +27,7 @@
       "Azure.Identity/1.13.1": {
         "dependencies": {
           "Azure.Core": "1.44.1",
-          "Microsoft.Identity.Client": "4.66.2",
+          "Microsoft.Identity.Client": "4.67.1",
           "Microsoft.Identity.Client.Extensions.Msal": "4.66.1",
           "System.Memory": "4.5.5",
           "System.Text.Json": "6.0.10",
@@ -86,21 +86,21 @@
           }
         }
       },
-      "Microsoft.Identity.Client/4.66.2": {
+      "Microsoft.Identity.Client/4.67.1": {
         "dependencies": {
           "Microsoft.IdentityModel.Abstractions": "8.2.0",
           "System.Diagnostics.DiagnosticSource": "6.0.1"
         },
         "runtime": {
-          "lib/net6.0/Microsoft.Identity.Client.dll": {
-            "assemblyVersion": "4.66.2.0",
-            "fileVersion": "4.66.2.0"
+          "lib/net8.0/Microsoft.Identity.Client.dll": {
+            "assemblyVersion": "4.67.1.0",
+            "fileVersion": "4.67.1.0"
           }
         }
       },
       "Microsoft.Identity.Client.Extensions.Msal/4.66.1": {
         "dependencies": {
-          "Microsoft.Identity.Client": "4.66.2",
+          "Microsoft.Identity.Client": "4.67.1",
           "System.Security.Cryptography.ProtectedData": "4.5.0"
         },
         "runtime": {
@@ -434,12 +434,12 @@
       "path": "microsoft.graph.core/3.2.1",
       "hashPath": "microsoft.graph.core.3.2.1.nupkg.sha512"
     },
-    "Microsoft.Identity.Client/4.66.2": {
+    "Microsoft.Identity.Client/4.67.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-OsWRWpJs5iY9DxAF7DfWRGVNeFhjz75x+/bpHKB9Hbnu3THUgqYfQrYeQMgwx30ctweiV7h00aQpEua2kLeUpg==",
-      "path": "microsoft.identity.client/4.66.2",
-      "hashPath": "microsoft.identity.client.4.66.2.nupkg.sha512"
+      "sha512": "sha512-dIyDowwo6B5NLd1a9IA5qirtOm0KT9fVCmVOVRKZasO77FxpfeOv8onlxBr8N6apohXCc0UpypWRZ3pjKVdPPw==",
+      "path": "microsoft.identity.client/4.67.1",
+      "hashPath": "microsoft.identity.client.4.67.1.nupkg.sha512"
     },
     "Microsoft.Identity.Client.Extensions.Msal/4.66.1": {
       "type": "package",

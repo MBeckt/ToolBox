@@ -115,19 +115,19 @@
           }
         }
       },
-      "Microsoft.Identity.Client/4.66.2": {
+      "Microsoft.Identity.Client/4.67.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.IdentityModel.Abstractions": "6.35.0",
           "System.Diagnostics.DiagnosticSource": "6.0.1"
         },
         "compile": {
-          "lib/net6.0/Microsoft.Identity.Client.dll": {
+          "lib/net8.0/Microsoft.Identity.Client.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net6.0/Microsoft.Identity.Client.dll": {
+          "lib/net8.0/Microsoft.Identity.Client.dll": {
             "related": ".xml"
           }
         }
@@ -708,10 +708,10 @@
         "microsoft.graph.core.nuspec"
       ]
     },
-    "Microsoft.Identity.Client/4.66.2": {
-      "sha512": "OsWRWpJs5iY9DxAF7DfWRGVNeFhjz75x+/bpHKB9Hbnu3THUgqYfQrYeQMgwx30ctweiV7h00aQpEua2kLeUpg==",
+    "Microsoft.Identity.Client/4.67.1": {
+      "sha512": "dIyDowwo6B5NLd1a9IA5qirtOm0KT9fVCmVOVRKZasO77FxpfeOv8onlxBr8N6apohXCc0UpypWRZ3pjKVdPPw==",
       "type": "package",
-      "path": "microsoft.identity.client/4.66.2",
+      "path": "microsoft.identity.client/4.67.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -720,15 +720,16 @@
         "lib/net462/Microsoft.Identity.Client.xml",
         "lib/net472/Microsoft.Identity.Client.dll",
         "lib/net472/Microsoft.Identity.Client.xml",
-        "lib/net6.0-android31.0/Microsoft.Identity.Client.dll",
-        "lib/net6.0-android31.0/Microsoft.Identity.Client.xml",
-        "lib/net6.0-ios15.4/Microsoft.Identity.Client.dll",
-        "lib/net6.0-ios15.4/Microsoft.Identity.Client.xml",
-        "lib/net6.0/Microsoft.Identity.Client.dll",
-        "lib/net6.0/Microsoft.Identity.Client.xml",
+        "lib/net8.0-android34.0/Microsoft.Identity.Client.aar",
+        "lib/net8.0-android34.0/Microsoft.Identity.Client.dll",
+        "lib/net8.0-android34.0/Microsoft.Identity.Client.xml",
+        "lib/net8.0-ios18.0/Microsoft.Identity.Client.dll",
+        "lib/net8.0-ios18.0/Microsoft.Identity.Client.xml",
+        "lib/net8.0/Microsoft.Identity.Client.dll",
+        "lib/net8.0/Microsoft.Identity.Client.xml",
         "lib/netstandard2.0/Microsoft.Identity.Client.dll",
         "lib/netstandard2.0/Microsoft.Identity.Client.xml",
-        "microsoft.identity.client.4.66.2.nupkg.sha512",
+        "microsoft.identity.client.4.67.1.nupkg.sha512",
         "microsoft.identity.client.nuspec"
       ]
     },
@@ -1522,23 +1523,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\MatthewBeckett\\.nuget\\packages\\": {},
+    "C:\\Users\\mrcat\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MatthewBeckett\\Downloads\\desktop-winforms\\ReferAll Graph Toolbox.csproj",
+      "projectUniqueName": "C:\\Users\\mrcat\\source\\repos\\MBeckt\\Expire-All-Passwords\\ReferAll Graph Toolbox.csproj",
       "projectName": "ReferAll Graph Toolbox",
-      "projectPath": "C:\\Users\\MatthewBeckett\\Downloads\\desktop-winforms\\ReferAll Graph Toolbox.csproj",
-      "packagesPath": "C:\\Users\\MatthewBeckett\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MatthewBeckett\\Downloads\\desktop-winforms\\obj\\",
+      "projectPath": "C:\\Users\\mrcat\\source\\repos\\MBeckt\\Expire-All-Passwords\\ReferAll Graph Toolbox.csproj",
+      "packagesPath": "C:\\Users\\mrcat\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mrcat\\source\\repos\\MBeckt\\Expire-All-Passwords\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\MatthewBeckett\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mrcat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1547,7 +1548,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1564,7 +1564,7 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       },
       "SdkAnalysisLevel": "9.0.100"
     },
@@ -1614,7 +1614,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

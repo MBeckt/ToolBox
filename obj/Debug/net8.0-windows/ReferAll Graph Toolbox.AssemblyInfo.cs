@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute("ReferAll Ltd.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0b3e918d0cfd1a24330235446718097566d6c55")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f6e178b81dfd6b17672b3505d5073079fef4a98")]
 [assembly: System.Reflection.AssemblyProductAttribute("ReferAll Graph Toolbox")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ReferAll Graph Toolbox")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
