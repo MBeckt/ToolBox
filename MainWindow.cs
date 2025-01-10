@@ -233,7 +233,7 @@ namespace MsalExample
                 textBox3.Enabled = false;
                 //textBox4.Enabled = false;
             }
-            if (checkBox1.Checked == false) 
+            if (checkBox1.Checked == false)
             {
                 textBox3.Enabled = true;
                 //textBox4.Enabled = true;
@@ -241,7 +241,7 @@ namespace MsalExample
 
         }
 
-            private void button2_Click(ApplicationOptions applicationOptions)
+        private void button2_Click(ApplicationOptions applicationOptions)
         {
             applicationOptions.ClientId = textBox2.Text;
         }
@@ -298,6 +298,11 @@ namespace MsalExample
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }

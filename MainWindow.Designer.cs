@@ -46,6 +46,7 @@ namespace MsalExample
             button3 = new Button();
             button4 = new Button();
             groupBox1 = new GroupBox();
+            label7 = new Label();
             textBox3 = new TextBox();
             groupBox2 = new GroupBox();
             groupBox3 = new GroupBox();
@@ -55,6 +56,7 @@ namespace MsalExample
             checkBox1 = new CheckBox();
             label5 = new Label();
             label6 = new Label();
+            groupBox4 = new GroupBox();
             ExitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
@@ -66,6 +68,7 @@ namespace MsalExample
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // ExitButton
@@ -135,7 +138,7 @@ namespace MsalExample
             // SignInButton
             // 
             SignInButton.Anchor = AnchorStyles.Top;
-            SignInButton.Location = new Point(17, 83);
+            SignInButton.Location = new Point(17, 89);
             SignInButton.Margin = new Padding(2);
             SignInButton.Name = "SignInButton";
             SignInButton.Size = new Size(152, 26);
@@ -158,7 +161,7 @@ namespace MsalExample
             // button5
             // 
             button5.Anchor = AnchorStyles.Top;
-            button5.Location = new Point(17, 32);
+            button5.Location = new Point(17, 55);
             button5.Margin = new Padding(2);
             button5.Name = "button5";
             button5.Size = new Size(152, 26);
@@ -197,7 +200,7 @@ namespace MsalExample
             // GraphResultsTextBox
             // 
             GraphResultsTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            GraphResultsTextBox.Location = new Point(6, 17);
+            GraphResultsTextBox.Location = new Point(9, 15);
             GraphResultsTextBox.Margin = new Padding(2);
             GraphResultsTextBox.Multiline = true;
             GraphResultsTextBox.Name = "GraphResultsTextBox";
@@ -209,18 +212,18 @@ namespace MsalExample
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(200, 8);
+            textBox1.Location = new Point(4, 13);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(386, 23);
+            textBox1.Size = new Size(396, 23);
             textBox1.TabIndex = 4;
             textBox1.Text = "2fdbaf70-405c-420d-81e6-0d5391cd6245";
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(200, 36);
+            textBox2.Location = new Point(4, 37);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(386, 23);
+            textBox2.Size = new Size(396, 23);
             textBox2.TabIndex = 6;
             textBox2.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
             textBox2.TextChanged += textBox2_TextChanged;
@@ -246,6 +249,7 @@ namespace MsalExample
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(button5);
             groupBox1.Controls.Add(SignInButton);
             groupBox1.Location = new Point(8, 65);
@@ -255,6 +259,16 @@ namespace MsalExample
             groupBox1.TabStop = false;
             groupBox1.Text = "Commands";
             groupBox1.Enter += groupBox1_Enter;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(21, 26);
+            label7.Name = "label7";
+            label7.Size = new Size(144, 15);
+            label7.TabIndex = 3;
+            label7.Text = "Will open login if required";
+            label7.Click += label7_Click;
             // 
             // textBox3
             // 
@@ -336,7 +350,7 @@ namespace MsalExample
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(592, 11);
+            label5.Location = new Point(406, 17);
             label5.Name = "label5";
             label5.Size = new Size(56, 15);
             label5.TabIndex = 12;
@@ -345,11 +359,23 @@ namespace MsalExample
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(592, 39);
+            label6.Location = new Point(406, 40);
             label6.Name = "label6";
             label6.Size = new Size(52, 15);
             label6.TabIndex = 13;
             label6.Text = "Client ID";
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(label6);
+            groupBox4.Controls.Add(textBox1);
+            groupBox4.Controls.Add(label5);
+            groupBox4.Controls.Add(textBox2);
+            groupBox4.Location = new Point(192, -2);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(470, 66);
+            groupBox4.TabIndex = 3;
+            groupBox4.TabStop = false;
             // 
             // MainWindow
             // 
@@ -357,14 +383,11 @@ namespace MsalExample
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = ExitButton;
             ClientSize = new Size(685, 560);
-            Controls.Add(label6);
-            Controls.Add(label5);
+            Controls.Add(groupBox4);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(button4);
             Controls.Add(button3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
             Controls.Add(GraphResultsPanel);
             Controls.Add(ExitButton);
             Controls.Add(SignInCallToActionLabel);
@@ -380,10 +403,13 @@ namespace MsalExample
             GraphResultsPanel.ResumeLayout(false);
             GraphResultsPanel.PerformLayout();
             groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -414,5 +440,7 @@ namespace MsalExample
         private GroupBox groupBox3;
         private Label label5;
         private Label label6;
+        private Label label7;
+        private GroupBox groupBox4;
     }
 }
