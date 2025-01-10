@@ -1,4 +1,5 @@
-﻿namespace MsalExample
+﻿
+namespace MsalExample
 {
     partial class MainWindow
     {
@@ -220,6 +221,7 @@
             button2.TabIndex = 7;
             button2.Text = "Save ClientID";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
@@ -229,6 +231,7 @@
             button3.TabIndex = 8;
             button3.Text = "Set Tenant to Staging";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += Button3_Click;
             // 
             // button4
             // 
@@ -291,6 +294,11 @@
             PerformLayout();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private Label SignInCallToActionLabel;
@@ -299,12 +307,12 @@
         private Button SignOutButton;
         private TextBox GraphResultsTextBox;
         private TextBox textBox1;
-        private Button button1;
         private TextBox textBox2;
-        private Button button2;
         private Button button3;
         private Button button4;
         private GroupBox groupBox1;
         private TextBox textBox3;
+        public Button button1;
+        public Button button2;
     }
 }

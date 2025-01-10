@@ -44,15 +44,6 @@ namespace MsalExample
                 .Build();
         }
 
-        
-        public void buttton1_Click(object sender, EventArgs e, ApplicationOptions applicationOptions)
-        {
-            applicationOptions.TenantId = textBox1.Text;
-        }
-        public void button2_Click(object sender, EventArgs e, ApplicationOptions applicationOptions)
-        {
-            applicationOptions.ClientId = textBox2.Text;
-        }
 
         // <summary>
         // Handle the "Sign In" button click. This will acquire an access token scoped to
@@ -208,6 +199,21 @@ namespace MsalExample
             GraphResultsPanel.Hide();
             GraphResultsTextBox.Clear();
             SignInCallToActionLabel.Show();
+        }
+
+        private void button1_Click(ApplicationOptions applicationOptions)
+        {
+            applicationOptions.TenantId = textBox1.Text;
+        }
+
+        private void button2_Click(ApplicationOptions applicationOptions)
+        {
+            applicationOptions.ClientId = textBox2.Text;
+        }
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "2fdbaf70-405c-420d-81e6-0d5391cd6245";
+            textBox2.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
