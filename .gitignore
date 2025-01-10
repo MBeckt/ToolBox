@@ -29,3 +29,5 @@
 /obj/Debug/net9.0-windows7.0/ReferAll Graph Toolbox.GeneratedMSBuildEditorConfig.editorconfig
 /bin/Debug/net9.0-windows7.0
 /.vs/slnx.sqlite
+/bin/Release/net9.0-windows7.0/win-x64
+/bin/Release/net9.0-windows7.0
