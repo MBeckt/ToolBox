@@ -146,7 +146,7 @@ namespace MsalExample
             SignInButton.Name = "SignInButton";
             SignInButton.Size = new Size(152, 26);
             SignInButton.TabIndex = 0;
-            SignInButton.Text = "Reset Password(s)";
+            SignInButton.Text = "Expire Password(s)";
             SignInButton.UseVisualStyleBackColor = true;
             SignInButton.Click += SignInButton_Click;
             // 
@@ -169,7 +169,7 @@ namespace MsalExample
             button5.Name = "button5";
             button5.Size = new Size(152, 26);
             button5.TabIndex = 2;
-            button5.Text = "Lookup User";
+            button5.Text = "Lookup User(s)";
             button5.UseVisualStyleBackColor = true;
             button5.Click += FindEmailButton_Click;
             // 
