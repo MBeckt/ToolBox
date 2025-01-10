@@ -226,7 +226,22 @@ namespace MsalExample
             applicationOptions.TenantId = textBox1.Text;
         }
 
-        private void button2_Click(ApplicationOptions applicationOptions)
+        private void checkbox_click(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                textBox3.Enabled = false;
+                textBox4.Enabled = false;
+            }
+            if (checkBox1.Checked == false) 
+            {
+                textBox3.Enabled = true;
+                textBox4.Enabled = true;
+            }
+
+        }
+
+            private void button2_Click(ApplicationOptions applicationOptions)
         {
             applicationOptions.ClientId = textBox2.Text;
         }
@@ -235,6 +250,12 @@ namespace MsalExample
             textBox1.Text = "2fdbaf70-405c-420d-81e6-0d5391cd6245";
             textBox2.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
         }
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "7fad452f-bb21-4814-9756-a7c7c9bbb90c";
+            textBox2.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
+        }
+
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
@@ -281,4 +302,5 @@ namespace MsalExample
 
         }
     }
+
 }

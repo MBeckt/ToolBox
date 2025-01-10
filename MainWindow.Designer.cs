@@ -42,9 +42,7 @@ namespace MsalExample
             GraphResultsPanel = new Panel();
             GraphResultsTextBox = new TextBox();
             textBox1 = new TextBox();
-            button1 = new Button();
             textBox2 = new TextBox();
-            button2 = new Button();
             button3 = new Button();
             button4 = new Button();
             groupBox1 = new GroupBox();
@@ -55,6 +53,8 @@ namespace MsalExample
             label4 = new Label();
             textBox4 = new TextBox();
             checkBox1 = new CheckBox();
+            label5 = new Label();
+            label6 = new Label();
             ExitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
@@ -209,55 +209,35 @@ namespace MsalExample
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(178, 8);
+            textBox1.Location = new Point(200, 8);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(367, 23);
+            textBox1.Size = new Size(386, 23);
             textBox1.TabIndex = 4;
             textBox1.Text = "2fdbaf70-405c-420d-81e6-0d5391cd6245";
             textBox1.TextChanged += textBox1_TextChanged;
             // 
-            // button1
-            // 
-            button1.Location = new Point(551, 7);
-            button1.Name = "button1";
-            button1.Size = new Size(110, 23);
-            button1.TabIndex = 5;
-            button1.Text = "Save TenantID";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // textBox2
             // 
-            textBox2.Location = new Point(178, 36);
+            textBox2.Location = new Point(200, 36);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(367, 23);
+            textBox2.Size = new Size(386, 23);
             textBox2.TabIndex = 6;
             textBox2.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
             textBox2.TextChanged += textBox2_TextChanged;
             // 
-            // button2
-            // 
-            button2.Location = new Point(551, 36);
-            button2.Name = "button2";
-            button2.Size = new Size(110, 23);
-            button2.TabIndex = 7;
-            button2.Text = "Save ClientID";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
             // button3
             // 
-            button3.Location = new Point(8, 7);
+            button3.Location = new Point(25, 7);
             button3.Name = "button3";
             button3.Size = new Size(158, 23);
             button3.TabIndex = 8;
             button3.Text = "Set Tenant to Staging";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += Button3_Click;
+            button3.Click += Button4_Click;
             // 
             // button4
             // 
-            button4.Location = new Point(8, 36);
+            button4.Location = new Point(25, 36);
             button4.Name = "button4";
             button4.Size = new Size(158, 23);
             button4.TabIndex = 9;
@@ -348,6 +328,25 @@ namespace MsalExample
             checkBox1.TabIndex = 5;
             checkBox1.Text = "All Users";
             checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckStateChanged += checkbox_click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(592, 11);
+            label5.Name = "label5";
+            label5.Size = new Size(56, 15);
+            label5.TabIndex = 12;
+            label5.Text = "Tenant ID";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(592, 39);
+            label6.Name = "label6";
+            label6.Size = new Size(52, 15);
+            label6.TabIndex = 13;
+            label6.Text = "Client ID";
             // 
             // MainWindow
             // 
@@ -355,13 +354,13 @@ namespace MsalExample
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = ExitButton;
             ClientSize = new Size(685, 560);
+            Controls.Add(label6);
+            Controls.Add(label5);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(button4);
             Controls.Add(button3);
-            Controls.Add(button2);
             Controls.Add(textBox2);
-            Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(GraphResultsPanel);
             Controls.Add(ExitButton);
@@ -404,13 +403,13 @@ namespace MsalExample
         private Button button4;
         private GroupBox groupBox1;
         private TextBox textBox3;
-        public Button button1;
-        public Button button2;
         private GroupBox groupBox2;
         private Label label3;
         private CheckBox checkBox1;
         private Label label4;
         private TextBox textBox4;
         private GroupBox groupBox3;
+        private Label label5;
+        private Label label6;
     }
 }
