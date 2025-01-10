@@ -261,6 +261,7 @@ namespace MsalExample
             textBox3.Enabled = false;
             textBox3.Location = new Point(68, 16);
             textBox3.Name = "textBox3";
+            textBox3.RightToLeft = RightToLeft.No;
             textBox3.Size = new Size(374, 23);
             textBox3.TabIndex = 1;
             // 
@@ -313,8 +314,10 @@ namespace MsalExample
             textBox4.Enabled = false;
             textBox4.Location = new Point(68, 45);
             textBox4.Name = "textBox4";
+            textBox4.RightToLeft = RightToLeft.No;
             textBox4.Size = new Size(374, 23);
             textBox4.TabIndex = 3;
+            textBox4.Text = "Not implemented";
             // 
             // checkBox1
             // 

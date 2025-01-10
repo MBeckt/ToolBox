@@ -231,12 +231,12 @@ namespace MsalExample
             if (checkBox1.Checked == true)
             {
                 textBox3.Enabled = false;
-                textBox4.Enabled = false;
+                //textBox4.Enabled = false;
             }
             if (checkBox1.Checked == false) 
             {
                 textBox3.Enabled = true;
-                textBox4.Enabled = true;
+                //textBox4.Enabled = true;
             }
 
         }
