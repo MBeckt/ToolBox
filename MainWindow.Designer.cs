@@ -338,7 +338,7 @@ namespace MsalExample
             checkBox1.AutoSize = true;
             checkBox1.Checked = true;
             checkBox1.CheckState = CheckState.Checked;
-            checkBox1.Location = new Point(6, 22);
+            checkBox1.Location = new Point(6, 26);
             checkBox1.Name = "checkBox1";
             checkBox1.RightToLeft = RightToLeft.Yes;
             checkBox1.Size = new Size(71, 19);
