@@ -29,6 +29,7 @@ namespace MsalExample
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Button ExitButton;
             TableLayoutPanel tableLayoutPanel1;
             Label label2;
@@ -49,6 +50,7 @@ namespace MsalExample
             label7 = new Label();
             textBox3 = new TextBox();
             groupBox2 = new GroupBox();
+            checkBox2 = new CheckBox();
             groupBox3 = new GroupBox();
             label3 = new Label();
             label4 = new Label();
@@ -57,6 +59,7 @@ namespace MsalExample
             label5 = new Label();
             label6 = new Label();
             groupBox4 = new GroupBox();
+            toolTip1 = new ToolTip(components);
             ExitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
@@ -282,6 +285,7 @@ namespace MsalExample
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(checkBox2);
             groupBox2.Controls.Add(groupBox3);
             groupBox2.Controls.Add(checkBox1);
             groupBox2.Location = new Point(200, 65);
@@ -290,6 +294,18 @@ namespace MsalExample
             groupBox2.TabIndex = 11;
             groupBox2.TabStop = false;
             groupBox2.Text = "Parameters";
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(102, 26);
+            checkBox2.Name = "checkBox2";
+            checkBox2.RightToLeft = RightToLeft.Yes;
+            checkBox2.Size = new Size(139, 19);
+            checkBox2.TabIndex = 13;
+            checkBox2.Text = "Target Login Account";
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckStateChanged += checkbox2_click;
             // 
             // groupBox3
             // 
@@ -377,6 +393,10 @@ namespace MsalExample
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             // 
+            // toolTip1
+            // 
+            toolTip1.ToolTipTitle = "Email Takes Prescedence";
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -442,5 +462,7 @@ namespace MsalExample
         private Label label6;
         private Label label7;
         private GroupBox groupBox4;
+        private ToolTip toolTip1;
+        private CheckBox checkBox2;
     }
 }
