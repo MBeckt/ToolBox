@@ -50,10 +50,11 @@ namespace MsalExample
             groupBox1 = new GroupBox();
             textBox3 = new TextBox();
             groupBox2 = new GroupBox();
-            checkBox1 = new CheckBox();
+            groupBox3 = new GroupBox();
+            label3 = new Label();
             label4 = new Label();
             textBox4 = new TextBox();
-            label3 = new Label();
+            checkBox1 = new CheckBox();
             ExitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
@@ -64,6 +65,7 @@ namespace MsalExample
             GraphResultsPanel.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // ExitButton
@@ -276,18 +278,16 @@ namespace MsalExample
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(68, 57);
+            textBox3.Enabled = false;
+            textBox3.Location = new Point(68, 16);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(393, 23);
+            textBox3.Size = new Size(374, 23);
             textBox3.TabIndex = 1;
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(groupBox3);
             groupBox2.Controls.Add(checkBox1);
-            groupBox2.Controls.Add(label4);
-            groupBox2.Controls.Add(textBox4);
-            groupBox2.Controls.Add(label3);
-            groupBox2.Controls.Add(textBox3);
             groupBox2.Location = new Point(200, 65);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(473, 130);
@@ -295,21 +295,34 @@ namespace MsalExample
             groupBox2.TabStop = false;
             groupBox2.Text = "Parameters";
             // 
-            // checkBox1
+            // groupBox3
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(6, 32);
-            checkBox1.Name = "checkBox1";
-            checkBox1.RightToLeft = RightToLeft.Yes;
-            checkBox1.Size = new Size(71, 19);
-            checkBox1.TabIndex = 5;
-            checkBox1.Text = "All Users";
-            checkBox1.UseVisualStyleBackColor = true;
+            groupBox3.Controls.Add(label3);
+            groupBox3.Controls.Add(label4);
+            groupBox3.Controls.Add(textBox3);
+            groupBox3.Controls.Add(textBox4);
+            groupBox3.Location = new Point(6, 47);
+            groupBox3.Name = "groupBox3";
+            groupBox3.RightToLeft = RightToLeft.Yes;
+            groupBox3.Size = new Size(461, 75);
+            groupBox3.TabIndex = 12;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Lookup / Reset User By Email or B2C ID";
+            groupBox3.Enter += groupBox3_Enter;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(6, 19);
+            label3.Name = "label3";
+            label3.Size = new Size(36, 15);
+            label3.TabIndex = 2;
+            label3.Text = "Email";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(6, 89);
+            label4.Location = new Point(6, 48);
             label4.Name = "label4";
             label4.Size = new Size(56, 15);
             label4.TabIndex = 4;
@@ -317,19 +330,24 @@ namespace MsalExample
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(68, 86);
+            textBox4.Enabled = false;
+            textBox4.Location = new Point(68, 45);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(393, 23);
+            textBox4.Size = new Size(374, 23);
             textBox4.TabIndex = 3;
             // 
-            // label3
+            // checkBox1
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(6, 60);
-            label3.Name = "label3";
-            label3.Size = new Size(36, 15);
-            label3.TabIndex = 2;
-            label3.Text = "Email";
+            checkBox1.AutoSize = true;
+            checkBox1.Checked = true;
+            checkBox1.CheckState = CheckState.Checked;
+            checkBox1.Location = new Point(6, 22);
+            checkBox1.Name = "checkBox1";
+            checkBox1.RightToLeft = RightToLeft.Yes;
+            checkBox1.Size = new Size(71, 19);
+            checkBox1.TabIndex = 5;
+            checkBox1.Text = "All Users";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -362,6 +380,8 @@ namespace MsalExample
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -391,5 +411,6 @@ namespace MsalExample
         private CheckBox checkBox1;
         private Label label4;
         private TextBox textBox4;
+        private GroupBox groupBox3;
     }
 }

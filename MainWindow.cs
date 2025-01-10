@@ -165,19 +165,39 @@ namespace MsalExample
                     .ExecuteAsync();
             }
 
-            // Call Microsoft Graph using the access token acquired above.
-            using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/me");
-            graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-            var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
-            graphResponseMessage.EnsureSuccessStatusCode();
+            if (checkBox1.Checked == true)
+            {
+                // Call Microsoft Graph using the access token acquired above.
+                using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
+                graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+                graphResponseMessage.EnsureSuccessStatusCode();
 
-            // Present the results to the user (formatting the json for readability)
-            using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
-            GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
-            var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
-            AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+                // Present the results to the user (formatting the json for readability)
+                using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
 
-            // Hide the call to action and show the results.
+                // Hide the call to action and show the results.
+
+            }
+            if (checkBox1.Checked == false)
+            {
+                var email = textBox3.Text;
+                // Call Microsoft Graph using the access token acquired above.
+                using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + textBox3.Text + "'" + " and id/issuer eq 'ReferallStaging.onmicrosoft')");// + email);
+                //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
+                graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+                //graphResponseMessage.EnsureSuccessStatusCode();
+
+                // Present the results to the user (formatting the json for readability)
+                using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+            }
             SignInCallToActionLabel.Hide();
             GraphResultsPanel.Show();
         }
@@ -252,6 +272,11 @@ namespace MsalExample
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
         {
 
         }
