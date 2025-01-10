@@ -50,10 +50,10 @@ namespace MsalExample
             groupBox1 = new GroupBox();
             textBox3 = new TextBox();
             groupBox2 = new GroupBox();
-            label3 = new Label();
-            textBox4 = new TextBox();
-            label4 = new Label();
             checkBox1 = new CheckBox();
+            label4 = new Label();
+            textBox4 = new TextBox();
+            label3 = new Label();
             ExitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
@@ -152,6 +152,18 @@ namespace MsalExample
             label1.Size = new Size(149, 15);
             label1.TabIndex = 0;
             label1.Text = "Microsoft Graph Response:";
+            // 
+            // button5
+            // 
+            button5.Anchor = AnchorStyles.Top;
+            button5.Location = new Point(17, 32);
+            button5.Margin = new Padding(2);
+            button5.Name = "button5";
+            button5.Size = new Size(152, 26);
+            button5.TabIndex = 2;
+            button5.Text = "Lookup User";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += FindEmailButton_Click;
             // 
             // SignInCallToActionLabel
             // 
@@ -269,17 +281,6 @@ namespace MsalExample
             textBox3.Size = new Size(393, 23);
             textBox3.TabIndex = 1;
             // 
-            // button5
-            // 
-            button5.Anchor = AnchorStyles.Top;
-            button5.Location = new Point(17, 32);
-            button5.Margin = new Padding(2);
-            button5.Name = "button5";
-            button5.Size = new Size(152, 26);
-            button5.TabIndex = 2;
-            button5.Text = "Lookup User";
-            button5.UseVisualStyleBackColor = true;
-            // 
             // groupBox2
             // 
             groupBox2.Controls.Add(checkBox1);
@@ -294,31 +295,6 @@ namespace MsalExample
             groupBox2.TabStop = false;
             groupBox2.Text = "Parameters";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(6, 60);
-            label3.Name = "label3";
-            label3.Size = new Size(36, 15);
-            label3.TabIndex = 2;
-            label3.Text = "Email";
-            // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(68, 86);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(393, 23);
-            textBox4.TabIndex = 3;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(6, 89);
-            label4.Name = "label4";
-            label4.Size = new Size(56, 15);
-            label4.TabIndex = 4;
-            label4.Text = "Object ID";
-            // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
@@ -329,6 +305,31 @@ namespace MsalExample
             checkBox1.TabIndex = 5;
             checkBox1.Text = "All Users";
             checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(6, 89);
+            label4.Name = "label4";
+            label4.Size = new Size(56, 15);
+            label4.TabIndex = 4;
+            label4.Text = "Object ID";
+            // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(68, 86);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(393, 23);
+            textBox4.TabIndex = 3;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(6, 60);
+            label3.Name = "label3";
+            label3.Size = new Size(36, 15);
+            label3.TabIndex = 2;
+            label3.Text = "Email";
             // 
             // MainWindow
             // 
