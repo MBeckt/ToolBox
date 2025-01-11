@@ -36,6 +36,7 @@ namespace MsalExample
             Button SignInButton;
             Label label1;
             Button button5;
+            Button button1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             AccessTokenSourceLabel = new Label();
             SignOutButton = new Button();
@@ -52,6 +53,8 @@ namespace MsalExample
             groupBox2 = new GroupBox();
             checkBox2 = new CheckBox();
             groupBox3 = new GroupBox();
+            textBox5 = new TextBox();
+            label8 = new Label();
             label3 = new Label();
             label4 = new Label();
             textBox4 = new TextBox();
@@ -66,6 +69,7 @@ namespace MsalExample
             SignInButton = new Button();
             label1 = new Label();
             button5 = new Button();
+            button1 = new Button();
             tableLayoutPanel1.SuspendLayout();
             GraphResultsPanel.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -96,7 +100,7 @@ namespace MsalExample
             tableLayoutPanel1.Controls.Add(label2, 0, 0);
             tableLayoutPanel1.Controls.Add(SignOutButton, 2, 0);
             tableLayoutPanel1.Dock = DockStyle.Bottom;
-            tableLayoutPanel1.Location = new Point(0, 288);
+            tableLayoutPanel1.Location = new Point(0, 276);
             tableLayoutPanel1.Margin = new Padding(2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
@@ -141,7 +145,7 @@ namespace MsalExample
             // SignInButton
             // 
             SignInButton.Anchor = AnchorStyles.Top;
-            SignInButton.Location = new Point(17, 89);
+            SignInButton.Location = new Point(17, 85);
             SignInButton.Margin = new Padding(2);
             SignInButton.Name = "SignInButton";
             SignInButton.Size = new Size(152, 26);
@@ -173,11 +177,23 @@ namespace MsalExample
             button5.UseVisualStyleBackColor = true;
             button5.Click += FindEmailButton_Click;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top;
+            button1.Location = new Point(17, 115);
+            button1.Margin = new Padding(2);
+            button1.Name = "button1";
+            button1.Size = new Size(152, 26);
+            button1.TabIndex = 4;
+            button1.Text = "Delete User";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += Delete_click;
+            // 
             // SignInCallToActionLabel
             // 
             SignInCallToActionLabel.Anchor = AnchorStyles.Top;
             SignInCallToActionLabel.AutoSize = true;
-            SignInCallToActionLabel.Location = new Point(142, 222);
+            SignInCallToActionLabel.Location = new Point(142, 315);
             SignInCallToActionLabel.Margin = new Padding(2, 0, 2, 0);
             SignInCallToActionLabel.Name = "SignInCallToActionLabel";
             SignInCallToActionLabel.Size = new Size(384, 45);
@@ -193,10 +209,10 @@ namespace MsalExample
             GraphResultsPanel.Controls.Add(label1);
             GraphResultsPanel.Controls.Add(GraphResultsTextBox);
             GraphResultsPanel.Controls.Add(tableLayoutPanel1);
-            GraphResultsPanel.Location = new Point(8, 210);
+            GraphResultsPanel.Location = new Point(8, 222);
             GraphResultsPanel.Margin = new Padding(2);
             GraphResultsPanel.Name = "GraphResultsPanel";
-            GraphResultsPanel.Size = new Size(668, 319);
+            GraphResultsPanel.Size = new Size(668, 307);
             GraphResultsPanel.TabIndex = 1;
             GraphResultsPanel.Visible = false;
             // 
@@ -209,7 +225,7 @@ namespace MsalExample
             GraphResultsTextBox.Name = "GraphResultsTextBox";
             GraphResultsTextBox.ReadOnly = true;
             GraphResultsTextBox.ScrollBars = ScrollBars.Both;
-            GraphResultsTextBox.Size = new Size(659, 269);
+            GraphResultsTextBox.Size = new Size(659, 257);
             GraphResultsTextBox.TabIndex = 1;
             GraphResultsTextBox.TextChanged += GraphResultsTextBox_TextChanged;
             // 
@@ -253,12 +269,13 @@ namespace MsalExample
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(button5);
             groupBox1.Controls.Add(SignInButton);
             groupBox1.Location = new Point(8, 65);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(186, 130);
+            groupBox1.Size = new Size(186, 152);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Commands";
@@ -290,7 +307,7 @@ namespace MsalExample
             groupBox2.Controls.Add(checkBox1);
             groupBox2.Location = new Point(200, 65);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(473, 130);
+            groupBox2.Size = new Size(473, 152);
             groupBox2.TabIndex = 11;
             groupBox2.TabStop = false;
             groupBox2.Text = "Parameters";
@@ -311,6 +328,8 @@ namespace MsalExample
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(textBox5);
+            groupBox3.Controls.Add(label8);
             groupBox3.Controls.Add(label3);
             groupBox3.Controls.Add(label4);
             groupBox3.Controls.Add(textBox3);
@@ -318,11 +337,29 @@ namespace MsalExample
             groupBox3.Location = new Point(6, 47);
             groupBox3.Name = "groupBox3";
             groupBox3.RightToLeft = RightToLeft.Yes;
-            groupBox3.Size = new Size(461, 75);
+            groupBox3.Size = new Size(461, 99);
             groupBox3.TabIndex = 12;
             groupBox3.TabStop = false;
             groupBox3.Text = "Lookup / Reset User By Email or B2C ID";
             groupBox3.Enter += groupBox3_Enter;
+            // 
+            // textBox5
+            // 
+            textBox5.Enabled = false;
+            textBox5.Location = new Point(68, 72);
+            textBox5.Name = "textBox5";
+            textBox5.RightToLeft = RightToLeft.No;
+            textBox5.Size = new Size(374, 23);
+            textBox5.TabIndex = 6;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(6, 75);
+            label8.Name = "label8";
+            label8.Size = new Size(49, 15);
+            label8.TabIndex = 5;
+            label8.Text = "Domain";
             // 
             // label3
             // 
@@ -464,5 +501,7 @@ namespace MsalExample
         private GroupBox groupBox4;
         private ToolTip toolTip1;
         private CheckBox checkBox2;
+        private TextBox textBox5;
+        private Label label8;
     }
 }

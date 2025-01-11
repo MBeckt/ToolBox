@@ -358,21 +358,102 @@ namespace MsalExample
             }
             if (checkBox1.Checked == false && checkBox2.Checked == true)
             {
-                    // Call Microsoft Graph using the access token acquired above.
-                    using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/me");// + email);
-                                                                                                                                                                                                                                                                 //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
-                    graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-                    var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
-                    //graphResponseMessage.EnsureSuccessStatusCode();
+                // Call Microsoft Graph using the access token acquired above.
+                using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/me");// + email);
+                                                                                                                       //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
+                graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+                //graphResponseMessage.EnsureSuccessStatusCode();
 
-                    // Present the results to the user (formatting the json for readability)
-                    using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
-                    GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
-                    var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
-                    AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
-             }
+                // Present the results to the user (formatting the json for readability)
+                using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+            }
+
+
+            if (checkBox1.Checked == false && checkBox2.Checked == false && !string.IsNullOrEmpty(textBox5.Text))
+            {
+                // https://developer.microsoft.com/en-us/graph/graph-explorer https://graph.microsoft.com/v1.0/users?$count=true&$search="displayName:room"&$filter=endsWith(mail,'microsoft.com')&$orderBy=displayName&$select=id,displayName,mail
+                using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/beta/users?$count=true&$filter=endsWith(mail,'" + textBox5.Text + "')&$orderBy=displayName&$select=id,displayName,mail");
+
+                graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+                //graphResponseMessage.EnsureSuccessStatusCode();
+
+                // Present the results to the user (formatting the json for readability)
+                using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+            }
             SignInCallToActionLabel.Hide();
             GraphResultsPanel.Show();
+
+
+        }
+
+        public async void Delete_click(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                GraphResultsTextBox.Text = "For our Safety I have disabled the ability to delete ALL users in one of our tenants.";
+            }
+            if (checkBox2.Checked == true)
+            {
+                GraphResultsTextBox.Text = "For Your Safety I have disabled the ability to delete-suicide";
+            }
+            if (!string.IsNullOrEmpty(textBox5.Text)) 
+            {
+                GraphResultsTextBox.Text = "I have disabled bulk deletion by domain until it can be made safer";
+            }
+            AuthenticationResult? msalAuthenticationResult = null;
+            var accounts = await msalPublicClientApp.GetAccountsAsync();
+            if (accounts.Any())
+            {
+                try
+                {
+                    msalAuthenticationResult = await msalPublicClientApp.AcquireTokenSilent(
+                        new[] { "https://graph.microsoft.com/User.Read" },
+                        accounts.First())
+                        .ExecuteAsync();
+                }
+                catch (MsalUiRequiredException)
+                {
+                }
+            }
+
+            if (msalAuthenticationResult == null)
+            {
+                msalAuthenticationResult = await msalPublicClientApp.AcquireTokenInteractive(
+                    new[] { "https://graph.microsoft.com/User.Read" })
+                    .ExecuteAsync();
+            }
+            if (!string.IsNullOrEmpty(textBox4.Text)) 
+            {
+                using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/beta/users/" + textBox4.Text);
+
+                graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+
+                using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+            }
+            if (!string.IsNullOrEmpty(textBox3.Text))
+            {
+                using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/beta/users/" + textBox3.Text);
+
+                graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+
+                using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+            }
         }
 
         /// <summary>
@@ -406,12 +487,14 @@ namespace MsalExample
             {
                 textBox3.Enabled = false;
                 textBox4.Enabled = false;
+                textBox5.Enabled = false;
                 checkBox2.Checked = false;
             }
             if (checkBox2.Checked == false && checkBox1.Checked == false)
             {
                 textBox3.Enabled = true;
                 textBox4.Enabled = true;
+                //textBox5.Enabled = true;
             }
 
         }
@@ -422,12 +505,14 @@ namespace MsalExample
             {
                 textBox3.Enabled = false;
                 textBox4.Enabled = false;
+                textBox5.Enabled = false;
                 checkBox1.Checked = false;
             }
-            if (checkBox2.Checked == false && checkBox1.Checked == false) 
+            if (checkBox2.Checked == false && checkBox1.Checked == false)
             {
                 textBox3.Enabled = true;
                 textBox4.Enabled = true;
+                //textBox5.Enabled = true;
             }
         }
 
@@ -498,6 +583,11 @@ namespace MsalExample
         }
 
         private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
 
         }
