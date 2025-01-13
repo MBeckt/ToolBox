@@ -33,13 +33,13 @@ namespace MsalExample
             Button ExitButton;
             TableLayoutPanel tableLayoutPanel1;
             Label label2;
-            Button SignInButton;
             Label label1;
             Button button5;
             Button button1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             AccessTokenSourceLabel = new Label();
             SignOutButton = new Button();
+            SignInButton = new Button();
             SignInCallToActionLabel = new Label();
             GraphResultsPanel = new Panel();
             GraphResultsTextBox = new TextBox();
@@ -66,7 +66,6 @@ namespace MsalExample
             ExitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
-            SignInButton = new Button();
             label1 = new Label();
             button5 = new Button();
             button1 = new Button();
@@ -142,18 +141,6 @@ namespace MsalExample
             SignOutButton.UseVisualStyleBackColor = true;
             SignOutButton.Click += SignOutButton_Click;
             // 
-            // SignInButton
-            // 
-            SignInButton.Anchor = AnchorStyles.Top;
-            SignInButton.Location = new Point(17, 85);
-            SignInButton.Margin = new Padding(2);
-            SignInButton.Name = "SignInButton";
-            SignInButton.Size = new Size(152, 26);
-            SignInButton.TabIndex = 0;
-            SignInButton.Text = "Expire Password(s)";
-            SignInButton.UseVisualStyleBackColor = true;
-            SignInButton.Click += SignInButton_Click;
-            // 
             // label1
             // 
             label1.AutoSize = true;
@@ -175,7 +162,7 @@ namespace MsalExample
             button5.TabIndex = 2;
             button5.Text = "Lookup User(s)";
             button5.UseVisualStyleBackColor = true;
-            button5.Click += FindEmailButton_Click;
+            button5.Click += FindUser_Click;
             // 
             // button1
             // 
@@ -189,6 +176,18 @@ namespace MsalExample
             button1.Text = "Delete User";
             button1.UseVisualStyleBackColor = true;
             button1.Click += Delete_click;
+            // 
+            // SignInButton
+            // 
+            SignInButton.Anchor = AnchorStyles.Top;
+            SignInButton.Location = new Point(17, 85);
+            SignInButton.Margin = new Padding(2);
+            SignInButton.Name = "SignInButton";
+            SignInButton.Size = new Size(152, 26);
+            SignInButton.TabIndex = 0;
+            SignInButton.Text = "Expire Password(s)";
+            SignInButton.UseVisualStyleBackColor = true;
+            SignInButton.Click += ExpirePassword_Click;
             // 
             // SignInCallToActionLabel
             // 
@@ -237,7 +236,7 @@ namespace MsalExample
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(396, 23);
             textBox1.TabIndex = 4;
-            textBox1.Text = "2fdbaf70-405c-420d-81e6-0d5391cd6245";
+            textBox1.Text = "Please Select a Tenant";
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // textBox2
@@ -247,12 +246,11 @@ namespace MsalExample
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(396, 23);
             textBox2.TabIndex = 6;
-            textBox2.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
+            textBox2.Text = "Please Select a Tenant";
             textBox2.TextChanged += textBox2_TextChanged;
             // 
             // button3
             // 
-            button3.Enabled = false;
             button3.Location = new Point(25, 7);
             button3.Name = "button3";
             button3.Size = new Size(158, 23);
@@ -507,5 +505,6 @@ namespace MsalExample
         private CheckBox checkBox2;
         private TextBox textBox5;
         private Label label8;
+        private Button SignInButton;
     }
 }

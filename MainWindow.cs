@@ -24,7 +24,7 @@ namespace MsalExample
         // have a lifecycle that at least matches the lifecycle of the user's session in
         // the application. In this sample, the lifecycle of the MSAL client is tied to
         // the lifecycle of this form instance, which is the whole of the application.
-        private readonly IPublicClientApplication msalPublicClientApp;
+        public IPublicClientApplication msalPublicClientApp;
 
         public MainWindow()
         {
@@ -35,15 +35,14 @@ namespace MsalExample
                 .CreateWithApplicationOptions(new PublicClientApplicationOptions
                 {
                     // Enter the tenant ID obtained from the Microsoft Entra admin center
-                    TenantId = "7fad452f-bb21-4814-9756-a7c7c9bbb90c", //textBox1.Text,
+                    TenantId = textBox1.Text,
 
                     // Enter the client ID obtained from the Microsoft Entra admin center
-                    ClientId = "2a798ec2-15e3-4dff-bfaa-edb924c1fc91" //textBox2.Text
+                    ClientId = textBox2.Text
                 })
                 .WithDefaultRedirectUri() // http://localhost
                 .Build();
         }
-        
         private void Button3_Click(object sender, EventArgs e)
         {
             //var IssueEnv = "'ReferallStaging.onmicrosoft'";
@@ -58,14 +57,30 @@ namespace MsalExample
 
         }
 
+
+
         // <summary>
         // Handle the "Sign In" button click. This will acquire an access token scoped to
         // Microsoft Graph, either from the cache or from an interactive session. It will
         // then use that access token in an HTTP request to Microsoft Graph and display
         // the results.
         // </summary>
-        private async void SignInButton_Click(object sender, EventArgs e)
+       
+        private async void ExpirePassword_Click(object sender, EventArgs e)
         {
+
+            if (textBox1.Text != msalPublicClientApp.AppConfig.TenantId) { 
+            msalPublicClientApp = PublicClientApplicationBuilder.CreateWithApplicationOptions(new PublicClientApplicationOptions
+            {
+                // Enter the tenant ID obtained from the Microsoft Entra admin center
+                TenantId = textBox1.Text,
+
+                // Enter the client ID obtained from the Microsoft Entra admin center
+                ClientId = textBox2.Text
+            })
+            .WithDefaultRedirectUri() // http://localhost
+            .Build();
+            }
             AuthenticationResult? msalAuthenticationResult = null;
 
             // Acquire a cached access token for Microsoft Graph if one is available from a prior
@@ -285,9 +300,21 @@ namespace MsalExample
             }
         }
         // Find USERS by EMAIL
-
-        private async void FindEmailButton_Click(object sender, EventArgs e)
+        private async void FindUser_Click(object sender, EventArgs e)
         {
+            if (textBox1.Text != msalPublicClientApp.AppConfig.TenantId)
+            {
+                msalPublicClientApp = PublicClientApplicationBuilder.CreateWithApplicationOptions(new PublicClientApplicationOptions
+                {
+                    // Enter the tenant ID obtained from the Microsoft Entra admin center
+                    TenantId = textBox1.Text,
+
+                    // Enter the client ID obtained from the Microsoft Entra admin center
+                    ClientId = textBox2.Text
+                })
+                .WithDefaultRedirectUri() // http://localhost
+                .Build();
+            }
             AuthenticationResult? msalAuthenticationResult = null;
 
             // Acquire a cached access token for Microsoft Graph if one is available from a prior
@@ -506,14 +533,15 @@ namespace MsalExample
                 textBox4.Enabled = false;
                 textBox5.Enabled = false;
                 checkBox2.Checked = false;
+                SignInButton.Enabled = false; // Remove this line to Expire All Passwords
             }
             if (checkBox2.Checked == false && checkBox1.Checked == false)
             {
                 textBox3.Enabled = true;
                 textBox4.Enabled = true;
                 //textBox5.Enabled = true;
+                SignInButton.Enabled = true;
             }
-
         }
 
         private void checkbox2_click(object sender, EventArgs e)
@@ -524,11 +552,13 @@ namespace MsalExample
                 textBox4.Enabled = false;
                 textBox5.Enabled = false;
                 checkBox1.Checked = false;
+                SignInButton.Enabled = true;
             }
             if (checkBox2.Checked == false && checkBox1.Checked == false)
             {
                 textBox3.Enabled = true;
                 textBox4.Enabled = true;
+                SignInButton.Enabled = true;
                 //textBox5.Enabled = true;
             }
         }
