@@ -28,22 +28,35 @@ namespace MsalExample
 
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); /// MAKE THIS INVOCABLE
 
             // Configure your public client application
             msalPublicClientApp = PublicClientApplicationBuilder
                 .CreateWithApplicationOptions(new PublicClientApplicationOptions
                 {
                     // Enter the tenant ID obtained from the Microsoft Entra admin center
-                    TenantId = textBox1.Text,
+                    TenantId = "7fad452f-bb21-4814-9756-a7c7c9bbb90c", //textBox1.Text,
 
                     // Enter the client ID obtained from the Microsoft Entra admin center
-                    ClientId = textBox2.Text
+                    ClientId = "2a798ec2-15e3-4dff-bfaa-edb924c1fc91" //textBox2.Text
                 })
                 .WithDefaultRedirectUri() // http://localhost
                 .Build();
         }
+        
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            //var IssueEnv = "'ReferallStaging.onmicrosoft'";
+            textBox1.Text = "2fdbaf70-405c-420d-81e6-0d5391cd6245";
+            textBox2.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
 
+        }
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "7fad452f-bb21-4814-9756-a7c7c9bbb90c";
+            textBox2.Text = "2a798ec2-15e3-4dff-bfaa-edb924c1fc91";
+
+        }
 
         // <summary>
         // Handle the "Sign In" button click. This will acquire an access token scoped to
@@ -136,7 +149,11 @@ namespace MsalExample
                 {
                     var existingText = textBox3.Text;
                     //existingText = textBox4.Text;
-                    var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + existingText + "'" + " and id/issuer eq 'ReferallStaging.onmicrosoft')");
+                    var IssueEnv = "'ReferallProduction.onmicrosoft'";
+                    if (textBox1.Text == "2fdbaf70-405c-420d-81e6-0d5391cd6245") {
+                        IssueEnv = "'StagingReferall.onmicrosoft'";
+                    }
+                    var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + existingText + "'" + " and id/issuer eq " + IssueEnv + ")");
                     usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
                     var usersResponse = await _httpClient.SendAsync(usersRequest);
                     usersResponse.EnsureSuccessStatusCode();
@@ -520,17 +537,6 @@ namespace MsalExample
         {
             applicationOptions.ClientId = textBox2.Text;
         }
-        private void Button3_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = "2fdbaf70-405c-420d-81e6-0d5391cd6245";
-            textBox2.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
-        }
-        private void Button4_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = "7fad452f-bb21-4814-9756-a7c7c9bbb90c";
-            textBox2.Text = "2a798ec2-15e3-4dff-bfaa-edb924c1fc91";
-        }
-
 
         private void ExitButton_Click(object sender, EventArgs e)
         {

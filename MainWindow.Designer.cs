@@ -112,7 +112,7 @@ namespace MsalExample
             // 
             AccessTokenSourceLabel.Anchor = AnchorStyles.Left;
             AccessTokenSourceLabel.AutoSize = true;
-            AccessTokenSourceLabel.Location = new Point(82, 8);
+            AccessTokenSourceLabel.Location = new Point(83, 8);
             AccessTokenSourceLabel.Margin = new Padding(0, 0, 2, 0);
             AccessTokenSourceLabel.Name = "AccessTokenSourceLabel";
             AccessTokenSourceLabel.Size = new Size(148, 15);
@@ -126,7 +126,7 @@ namespace MsalExample
             label2.Location = new Point(2, 8);
             label2.Margin = new Padding(2, 0, 0, 0);
             label2.Name = "label2";
-            label2.Size = new Size(80, 15);
+            label2.Size = new Size(81, 15);
             label2.TabIndex = 0;
             label2.Text = "Access Token:";
             // 
@@ -180,6 +180,7 @@ namespace MsalExample
             // button1
             // 
             button1.Anchor = AnchorStyles.Top;
+            button1.Enabled = false;
             button1.Location = new Point(17, 115);
             button1.Margin = new Padding(2);
             button1.Name = "button1";
@@ -196,7 +197,7 @@ namespace MsalExample
             SignInCallToActionLabel.Location = new Point(142, 315);
             SignInCallToActionLabel.Margin = new Padding(2, 0, 2, 0);
             SignInCallToActionLabel.Name = "SignInCallToActionLabel";
-            SignInCallToActionLabel.Size = new Size(384, 45);
+            SignInCallToActionLabel.Size = new Size(385, 45);
             SignInCallToActionLabel.TabIndex = 2;
             SignInCallToActionLabel.Text = "This application will access Microsoft Graph, if you authorize it to do so.\r\n\r\nClick any button above to get started.";
             SignInCallToActionLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -231,6 +232,7 @@ namespace MsalExample
             // 
             // textBox1
             // 
+            textBox1.Enabled = false;
             textBox1.Location = new Point(4, 13);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(396, 23);
@@ -240,6 +242,7 @@ namespace MsalExample
             // 
             // textBox2
             // 
+            textBox2.Enabled = false;
             textBox2.Location = new Point(4, 37);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(396, 23);
@@ -249,6 +252,7 @@ namespace MsalExample
             // 
             // button3
             // 
+            button3.Enabled = false;
             button3.Location = new Point(25, 7);
             button3.Name = "button3";
             button3.Size = new Size(158, 23);
@@ -320,7 +324,7 @@ namespace MsalExample
             checkBox2.Location = new Point(187, 26);
             checkBox2.Name = "checkBox2";
             checkBox2.RightToLeft = RightToLeft.Yes;
-            checkBox2.Size = new Size(139, 19);
+            checkBox2.Size = new Size(140, 19);
             checkBox2.TabIndex = 13;
             checkBox2.Text = "Target Login Account";
             checkBox2.UseVisualStyleBackColor = true;
@@ -394,7 +398,7 @@ namespace MsalExample
             checkBox1.Location = new Point(6, 26);
             checkBox1.Name = "checkBox1";
             checkBox1.RightToLeft = RightToLeft.Yes;
-            checkBox1.Size = new Size(157, 19);
+            checkBox1.Size = new Size(159, 19);
             checkBox1.TabIndex = 5;
             checkBox1.Text = "Target All Users in Tenant";
             checkBox1.UseVisualStyleBackColor = true;
@@ -405,7 +409,7 @@ namespace MsalExample
             label5.AutoSize = true;
             label5.Location = new Point(406, 17);
             label5.Name = "label5";
-            label5.Size = new Size(56, 15);
+            label5.Size = new Size(57, 15);
             label5.TabIndex = 12;
             label5.Text = "Tenant ID";
             // 
