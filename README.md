@@ -1,3 +1,7 @@
+# ToDo
+Make Invocable Client Tenant ID strings for building connection arg.
+Remove 'Domain' until it can be used on B2C tenants || Add Main nonb2c tenant.
+
 # .NET | Windows Forms | user sign-in, protected web API access (Microsoft Graph) | Microsoft identity platform
 
 This .NET Windows Forms application authenticates a user and then makes a request to the Graph API as the authenticated user. The response to the request is presented to the user.
