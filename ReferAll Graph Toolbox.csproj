@@ -10,7 +10,7 @@
 	<DebugType>embedded</DebugType>
 	<ApplicationIcon>SAA Wrench128.ico</ApplicationIcon>
 	<Copyright>ReferAll Ltd.</Copyright>
-	<FileVersion>1.2.7.1</FileVersion>
+	<FileVersion>1.3.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="SAA Wrench128.ico" />
