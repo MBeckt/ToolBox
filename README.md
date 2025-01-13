@@ -1,6 +1,7 @@
 # ToDo
-Make Invocable Client Tenant ID strings for building connection arg.
-Remove 'Domain' until it can be used on B2C tenants || Add Main nonb2c tenant.
+Make Invocable Client Tenant ID strings for building connection arg.<br>
+Remove 'Domain' until it can be used on B2C tenants || Add Main nonb2c tenant.<br>
+Enter IDs prior to creating PublicClientApplicationBuilder
 
 # .NET | Windows Forms | user sign-in, protected web API access (Microsoft Graph) | Microsoft identity platform
 
