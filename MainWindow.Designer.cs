@@ -246,7 +246,6 @@ namespace MsalExample
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(396, 23);
             textBox2.TabIndex = 6;
-            textBox2.Text = "Please Select a Tenant";
             textBox2.TextChanged += textBox2_TextChanged;
             // 
             // button3
