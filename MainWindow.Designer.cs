@@ -34,17 +34,17 @@ namespace MsalExample
             TableLayoutPanel tableLayoutPanel1;
             Label label2;
             Label label1;
-            Button button5;
-            Button button1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             AccessTokenSourceLabel = new Label();
             SignOutButton = new Button();
-            SignInButton = new Button();
+            LookupUser = new Button();
+            DeleteUser = new Button();
+            ExpirePasswords = new Button();
             SignInCallToActionLabel = new Label();
             GraphResultsPanel = new Panel();
             GraphResultsTextBox = new TextBox();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            TenantID = new TextBox();
+            ClientId = new TextBox();
             button3 = new Button();
             button4 = new Button();
             groupBox1 = new GroupBox();
@@ -67,8 +67,6 @@ namespace MsalExample
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
             label1 = new Label();
-            button5 = new Button();
-            button1 = new Button();
             tableLayoutPanel1.SuspendLayout();
             GraphResultsPanel.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -152,42 +150,44 @@ namespace MsalExample
             label1.TabIndex = 0;
             label1.Text = "Microsoft Graph Response:";
             // 
-            // button5
+            // LookupUser
             // 
-            button5.Anchor = AnchorStyles.Top;
-            button5.Location = new Point(17, 55);
-            button5.Margin = new Padding(2);
-            button5.Name = "button5";
-            button5.Size = new Size(152, 26);
-            button5.TabIndex = 2;
-            button5.Text = "Lookup User(s)";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += FindUser_Click;
+            LookupUser.Anchor = AnchorStyles.Top;
+            LookupUser.Enabled = false;
+            LookupUser.Location = new Point(17, 55);
+            LookupUser.Margin = new Padding(2);
+            LookupUser.Name = "LookupUser";
+            LookupUser.Size = new Size(152, 26);
+            LookupUser.TabIndex = 2;
+            LookupUser.Text = "Lookup User(s)";
+            LookupUser.UseVisualStyleBackColor = true;
+            LookupUser.Click += FindUser_Click;
             // 
-            // button1
+            // DeleteUser
             // 
-            button1.Anchor = AnchorStyles.Top;
-            button1.Enabled = false;
-            button1.Location = new Point(17, 115);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(152, 26);
-            button1.TabIndex = 4;
-            button1.Text = "Delete User";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += Delete_click;
+            DeleteUser.Anchor = AnchorStyles.Top;
+            DeleteUser.Enabled = false;
+            DeleteUser.Location = new Point(17, 115);
+            DeleteUser.Margin = new Padding(2);
+            DeleteUser.Name = "DeleteUser";
+            DeleteUser.Size = new Size(152, 26);
+            DeleteUser.TabIndex = 4;
+            DeleteUser.Text = "Delete User";
+            DeleteUser.UseVisualStyleBackColor = true;
+            DeleteUser.Click += Delete_click;
             // 
-            // SignInButton
+            // ExpirePasswords
             // 
-            SignInButton.Anchor = AnchorStyles.Top;
-            SignInButton.Location = new Point(17, 85);
-            SignInButton.Margin = new Padding(2);
-            SignInButton.Name = "SignInButton";
-            SignInButton.Size = new Size(152, 26);
-            SignInButton.TabIndex = 0;
-            SignInButton.Text = "Expire Password(s)";
-            SignInButton.UseVisualStyleBackColor = true;
-            SignInButton.Click += ExpirePassword_Click;
+            ExpirePasswords.Anchor = AnchorStyles.Top;
+            ExpirePasswords.Enabled = false;
+            ExpirePasswords.Location = new Point(17, 85);
+            ExpirePasswords.Margin = new Padding(2);
+            ExpirePasswords.Name = "ExpirePasswords";
+            ExpirePasswords.Size = new Size(152, 26);
+            ExpirePasswords.TabIndex = 0;
+            ExpirePasswords.Text = "Expire Password(s)";
+            ExpirePasswords.UseVisualStyleBackColor = true;
+            ExpirePasswords.Click += ExpirePassword_Click;
             // 
             // SignInCallToActionLabel
             // 
@@ -229,24 +229,24 @@ namespace MsalExample
             GraphResultsTextBox.TabIndex = 1;
             GraphResultsTextBox.TextChanged += GraphResultsTextBox_TextChanged;
             // 
-            // textBox1
+            // TenantID
             // 
-            textBox1.Enabled = false;
-            textBox1.Location = new Point(4, 13);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(396, 23);
-            textBox1.TabIndex = 4;
-            textBox1.Text = "Please Select a Tenant";
-            textBox1.TextChanged += textBox1_TextChanged;
+            TenantID.Enabled = false;
+            TenantID.Location = new Point(4, 13);
+            TenantID.Name = "TenantID";
+            TenantID.Size = new Size(396, 23);
+            TenantID.TabIndex = 4;
+            TenantID.Text = "Please Select a Tenant";
+            TenantID.TextChanged += textBox1_TextChanged;
             // 
-            // textBox2
+            // ClientId
             // 
-            textBox2.Enabled = false;
-            textBox2.Location = new Point(4, 37);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(396, 23);
-            textBox2.TabIndex = 6;
-            textBox2.TextChanged += textBox2_TextChanged;
+            ClientId.Enabled = false;
+            ClientId.Location = new Point(4, 37);
+            ClientId.Name = "ClientId";
+            ClientId.Size = new Size(396, 23);
+            ClientId.TabIndex = 6;
+            ClientId.TextChanged += textBox2_TextChanged;
             // 
             // button3
             // 
@@ -270,10 +270,10 @@ namespace MsalExample
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(DeleteUser);
             groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(button5);
-            groupBox1.Controls.Add(SignInButton);
+            groupBox1.Controls.Add(LookupUser);
+            groupBox1.Controls.Add(ExpirePasswords);
             groupBox1.Location = new Point(8, 65);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(186, 152);
@@ -422,9 +422,9 @@ namespace MsalExample
             // groupBox4
             // 
             groupBox4.Controls.Add(label6);
-            groupBox4.Controls.Add(textBox1);
+            groupBox4.Controls.Add(TenantID);
             groupBox4.Controls.Add(label5);
-            groupBox4.Controls.Add(textBox2);
+            groupBox4.Controls.Add(ClientId);
             groupBox4.Location = new Point(192, -2);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(470, 66);
@@ -485,7 +485,7 @@ namespace MsalExample
         private Button SignOutButton;
         private TextBox GraphResultsTextBox;
         private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox ClientId;
         private Button button3;
         private Button button4;
         private GroupBox groupBox1;
@@ -504,6 +504,9 @@ namespace MsalExample
         private CheckBox checkBox2;
         private TextBox textBox5;
         private Label label8;
-        private Button SignInButton;
+        public Button ExpirePasswords;
+        public TextBox TenantID;
+        public Button LookupUser;
+        public Button DeleteUser;
     }
 }
