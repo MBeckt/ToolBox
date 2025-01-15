@@ -3,7 +3,8 @@
 - [x] Remove 'Domain' until it can be used on B2C tenants <br>
 - [ ] Add Main nonb2c tenant.<br>
 - [x] Enter IDs prior to creating PublicClientApplicationBuilder<br>
-- [x] Make Application 'Safer'
+- [x] Make Application 'Safer'<br>
+- [ ] LOG '918acea08535f43787dde02eec4c90591f102681' PREVIOUS QUERY PRIOR TO THIS COMMIT ID. ADD LEGACY QUERY FEATURE
 
 # .NET | Windows Forms | user sign-in, protected web API access (Microsoft Graph) | Microsoft identity platform
 
