@@ -374,7 +374,7 @@ namespace MsalExample
                 {
                     var email = textBox3.Text;
                     // Call Microsoft Graph using the access token acquired above.
-                    using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + textBox3.Text + "'" + " and id/issuer eq 'ReferallStaging.onmicrosoft')");// + email);
+                    using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + textBox3.Text + "'" + " and id/issuer eq 'ReferallStaging.onmicrosoft')&$select=displayName,mail,identities,otherMails");// + email);
                                                                                                                                                                                                                                                                  //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
                     graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
                     var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
@@ -388,9 +388,9 @@ namespace MsalExample
                 }
                 if (!string.IsNullOrEmpty(textBox4.Text))
                 {
-                    var email = textBox4.Text;
+                    var objectID = textBox4.Text;
                     // Call Microsoft Graph using the access token acquired above.
-                    using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users/" + email);
+                    using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users/" + objectID + "?$select=displayName,mail,identities,otherMails");
                     //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
                     graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
                     var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
