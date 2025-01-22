@@ -16,7 +16,7 @@ using Azure.Core;
 
 namespace MsalExample
 {
-    
+
     public partial class MainWindow : Form
     {
         private readonly HttpClient _httpClient = new();
@@ -68,21 +68,22 @@ namespace MsalExample
         // then use that access token in an HTTP request to Microsoft Graph and display
         // the results.
         // </summary>
-       
+
         private async void ExpirePassword_Click(object sender, EventArgs e)
         {
 
-            if (TenantID.Text != msalPublicClientApp.AppConfig.TenantId) { 
-            msalPublicClientApp = PublicClientApplicationBuilder.CreateWithApplicationOptions(new PublicClientApplicationOptions
+            if (TenantID.Text != msalPublicClientApp.AppConfig.TenantId)
             {
-                // Enter the tenant ID obtained from the Microsoft Entra admin center
-                TenantId = TenantID.Text,
+                msalPublicClientApp = PublicClientApplicationBuilder.CreateWithApplicationOptions(new PublicClientApplicationOptions
+                {
+                    // Enter the tenant ID obtained from the Microsoft Entra admin center
+                    TenantId = TenantID.Text,
 
-                // Enter the client ID obtained from the Microsoft Entra admin center
-                ClientId = ClientId.Text
-            })
-            .WithDefaultRedirectUri() // http://localhost
-            .Build();
+                    // Enter the client ID obtained from the Microsoft Entra admin center
+                    ClientId = ClientId.Text
+                })
+                .WithDefaultRedirectUri() // http://localhost
+                .Build();
             }
             AuthenticationResult? msalAuthenticationResult = null;
 
@@ -168,7 +169,8 @@ namespace MsalExample
                     var existingText = textBox3.Text;
                     //existingText = textBox4.Text;
                     var IssueEnv = "'ReferallProduction.onmicrosoft'";
-                    if (TenantID.Text == "2fdbaf70-405c-420d-81e6-0d5391cd6245") {
+                    if (TenantID.Text == "2fdbaf70-405c-420d-81e6-0d5391cd6245")
+                    {
                         IssueEnv = "'StagingReferall.onmicrosoft'";
                     }
                     var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + existingText + "'" + " and id/issuer eq " + IssueEnv + ")");
@@ -370,19 +372,24 @@ namespace MsalExample
             }
             if (checkBox1.Checked == false && checkBox2.Checked == false)
             {
+                var IssueEnv = "'ReferallProduction.onmicrosoft'";
+                if (TenantID.Text == "2fdbaf70-405c-420d-81e6-0d5391cd6245")
+                {
+                    IssueEnv = "'StagingReferall.onmicrosoft'";
+                }
                 if (!string.IsNullOrEmpty(textBox3.Text))
                 {
                     var email = textBox3.Text;
                     // Call Microsoft Graph using the access token acquired above.
-                    using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + textBox3.Text + "'" + " and id/issuer eq 'ReferallStaging.onmicrosoft')&$select=displayName,mail,identities,otherMails");// + email);
-                                                                                                                                                                                                                                                                 //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
+                    using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + email + "'" + " and id/issuer eq " + "'" + IssueEnv + "'" + ")&$select=displayName,mail,identities,otherMails");// + email);
+                                                                                                                                                                                                                                                                                                                //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
                     graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
                     var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
                     //graphResponseMessage.EnsureSuccessStatusCode();
 
                     // Present the results to the user (formatting the json for readability)
                     using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
-                    GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                    GraphResultsTextBox.Text += System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
                     var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                     AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
                 }
@@ -398,7 +405,7 @@ namespace MsalExample
 
                     // Present the results to the user (formatting the json for readability)
                     using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
-                    GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                    GraphResultsTextBox.Text += System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
                     var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                     AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
                 }
@@ -451,7 +458,7 @@ namespace MsalExample
             {
                 GraphResultsTextBox.Text = "For Your Safety I have disabled the ability to delete-suicide";
             }
-            if (!string.IsNullOrEmpty(textBox5.Text)) 
+            if (!string.IsNullOrEmpty(textBox5.Text))
             {
                 GraphResultsTextBox.Text = "I have disabled bulk deletion by domain until it can be made safer";
             }
@@ -477,7 +484,7 @@ namespace MsalExample
                     new[] { "https://graph.microsoft.com/User.Read" })
                     .ExecuteAsync();
             }
-            if (!string.IsNullOrEmpty(textBox4.Text)) 
+            if (!string.IsNullOrEmpty(textBox4.Text))
             {
                 using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/beta/users/" + textBox4.Text);
 
@@ -605,11 +612,11 @@ namespace MsalExample
         {
             LookupUser.Enabled = true;
             ExpirePasswords.Enabled = true;
-            if (TenantID.Text == Production && checkBox1.Checked == true) 
+            if (TenantID.Text == Production && checkBox1.Checked == true)
             {
                 ExpirePasswords.Enabled = false;
             }
-            if (TenantID.Text == Staging) 
+            if (TenantID.Text == Staging)
             {
                 ExpirePasswords.Enabled = true;
             }
@@ -655,6 +662,21 @@ namespace MsalExample
         }
 
         private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
         }

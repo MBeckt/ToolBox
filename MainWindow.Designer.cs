@@ -325,6 +325,7 @@ namespace MsalExample
             checkBox2.TabIndex = 13;
             checkBox2.Text = "Target Login Account";
             checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += checkBox2_CheckedChanged;
             checkBox2.CheckStateChanged += checkbox2_click;
             // 
             // groupBox3
@@ -388,6 +389,7 @@ namespace MsalExample
             textBox4.RightToLeft = RightToLeft.No;
             textBox4.Size = new Size(374, 23);
             textBox4.TabIndex = 3;
+            textBox4.TextChanged += textBox4_TextChanged;
             // 
             // checkBox1
             // 
@@ -399,6 +401,7 @@ namespace MsalExample
             checkBox1.TabIndex = 5;
             checkBox1.Text = "Target All Users in Tenant";
             checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             checkBox1.CheckStateChanged += checkbox_click;
             // 
             // label5
