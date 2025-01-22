@@ -300,6 +300,7 @@ namespace MsalExample
             textBox3.RightToLeft = RightToLeft.No;
             textBox3.Size = new Size(374, 23);
             textBox3.TabIndex = 1;
+            textBox3.TextChanged += textBox3_TextChanged;
             // 
             // groupBox2
             // 
@@ -487,7 +488,6 @@ namespace MsalExample
         private Label AccessTokenSourceLabel;
         private Button SignOutButton;
         private TextBox GraphResultsTextBox;
-        private TextBox textBox1;
         private TextBox ClientId;
         private Button button3;
         private Button button4;
