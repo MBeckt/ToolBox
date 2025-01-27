@@ -535,7 +535,7 @@ namespace MsalExample
             applicationOptions.TenantId = TenantID.Text;
         }
 
-        private void checkbox_click(object sender, EventArgs e)
+        private void checkbox_click(object sender, EventArgs e) // THIS IS STATE CHANGED NOT CLICK YOU RETARD // REWRITE ALL RULES, DOUBLING LOGIC FOR NO REASON - IDIOT!
         {
             if (checkBox1.Checked == true)
             {
@@ -563,7 +563,11 @@ namespace MsalExample
             }
             if (TenantID.Text == Production && checkBox1.Checked == true)
             {
-                //ExpirePasswords.Enabled = false; // Remove this line to Expire All Passwords
+                ExpirePasswords.Enabled = false; // Remove this line to Expire All Passwords
+            }
+            if (TenantID.Text == Production && checkBox1.Checked == false && checkBox2.Checked == false)
+            {
+                ExpirePasswords.Enabled = true;
             }
         }
 
@@ -596,6 +600,10 @@ namespace MsalExample
             {
                 ExpirePasswords.Enabled = true;
             }
+            if (TenantID.Text == Production && checkBox2.Checked == true)
+            {
+                ExpirePasswords.Enabled = false;
+            }
         }
 
         private void button2_Click(ApplicationOptions applicationOptions)
@@ -624,7 +632,7 @@ namespace MsalExample
             ExpirePasswords.Enabled = true;
             if (TenantID.Text == Production && checkBox1.Checked == true)
             {
-                //ExpirePasswords.Enabled = false;
+                ExpirePasswords.Enabled = false;
             }
             if (TenantID.Text == Production && checkBox2.Checked == true)
             {
