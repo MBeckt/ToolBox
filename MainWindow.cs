@@ -51,13 +51,13 @@ namespace MsalExample
             //var IssueEnv = "'ReferallStaging.onmicrosoft'";
             TenantID.Text = "2fdbaf70-405c-420d-81e6-0d5391cd6245";
             ClientId.Text = "1be0f404-8ead-476c-bc75-72a6bd2ac06d";
-
+            //LookupUser.Enabled = true;
         }
         private void Button4_Click(object sender, EventArgs e)
         {
             TenantID.Text = "7fad452f-bb21-4814-9756-a7c7c9bbb90c";
             ClientId.Text = "2a798ec2-15e3-4dff-bfaa-edb924c1fc91";
-
+            //LookupUser.Enabled = true;
         }
 
 
@@ -549,7 +549,13 @@ namespace MsalExample
                 textBox3.Enabled = true;
                 textBox4.Enabled = true;
                 //textBox5.Enabled = true;
-                ExpirePasswords.Enabled = true;
+            }
+            if (checkBox2.Checked == true && checkBox1.Checked == false) // Hides Self Password Expiry on Production.
+            {
+                if(TenantID.Text == Production) // || TenantID.Text == Staging
+                {
+                    ExpirePasswords.Enabled = false;
+                }
             }
             if (TenantID.Text == Staging)
             {
@@ -557,7 +563,7 @@ namespace MsalExample
             }
             if (TenantID.Text == Production && checkBox1.Checked == true)
             {
-                ExpirePasswords.Enabled = false; // Remove this line to Expire All Passwords
+                //ExpirePasswords.Enabled = false; // Remove this line to Expire All Passwords
             }
         }
 
@@ -569,18 +575,22 @@ namespace MsalExample
                 textBox4.Enabled = false;
                 textBox5.Enabled = false;
                 checkBox1.Checked = false;
-                ExpirePasswords.Enabled = true;
+                //ExpirePasswords.Enabled = true;
             }
             if (checkBox2.Checked == false && checkBox1.Checked == false)
             {
                 textBox3.Enabled = true;
                 textBox4.Enabled = true;
-                ExpirePasswords.Enabled = true;
+                //ExpirePasswords.Enabled = true;
                 //textBox5.Enabled = true;
             }
             if (TenantID.Text == Production && checkBox2.Checked == true)
             {
                 ExpirePasswords.Enabled = false;
+            }
+            if (TenantID.Text == Production && checkBox2.Checked == false)
+            {
+                ExpirePasswords.Enabled = true;
             }
             if (TenantID.Text == Staging)
             {
@@ -614,13 +624,13 @@ namespace MsalExample
             ExpirePasswords.Enabled = true;
             if (TenantID.Text == Production && checkBox1.Checked == true)
             {
-                ExpirePasswords.Enabled = false;
-            }
-            if (TenantID.Text == Staging)
-            {
-                ExpirePasswords.Enabled = true;
+                //ExpirePasswords.Enabled = false;
             }
             if (TenantID.Text == Production && checkBox2.Checked == true)
+            {
+                ExpirePasswords.Enabled = false;
+            }
+            if (checkBox1.Checked == true && checkBox2.Checked == true)
             {
                 ExpirePasswords.Enabled = false;
             }
