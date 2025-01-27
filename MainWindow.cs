@@ -13,6 +13,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Net;
 using Azure.Core;
+using System.Data;
 
 namespace MsalExample
 {
@@ -134,8 +135,8 @@ namespace MsalExample
                 var patchContent = new StringContent(payloadJSON, Encoding.UTF8, "application/json");
 
                 // Iterate through all users and apply the patch
-                foreach (var user in users.EnumerateArray())
-                {
+                foreach (var user in users.EnumerateArray()) // https://learn.microsoft.com/en-us/answers/questions/715354/how-to-display-json-data-into-gridview
+                {                                           // https://stackoverflow.com/questions/23763446/how-to-display-json-data-in-a-datagridview-in-winforms
                     var userId = user.GetProperty("id").GetString();
                     var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}")
                     {

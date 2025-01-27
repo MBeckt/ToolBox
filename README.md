@@ -5,6 +5,73 @@
 - [x] Enter IDs prior to creating PublicClientApplicationBuilder<br>
 - [x] Make Application 'Safer'<br>
 - [ ] LOG '918acea08535f43787dde02eec4c90591f102681' PREVIOUS QUERY PRIOR TO THIS COMMIT ID. ADD LEGACY QUERY FEATURE
+- [ ] 
+- [ ] 
+
+```
+if (msalAuthenticationResult == null)
+            {
+                msalAuthenticationResult = await msalPublicClientApp.AcquireTokenInteractive(
+                    new[] { "https://graph.microsoft.com/User.Read" })
+                    .ExecuteAsync();
+            }
+
+            if (checkBox1.Checked == true && checkBox2.Checked == false)
+            {
+                var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
+                usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var usersResponse = await _httpClient.SendAsync(usersRequest);
+                usersResponse.EnsureSuccessStatusCode();
+                var usersJson = await usersResponse.Content.ReadAsStringAsync();
+                var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+
+                // Create a DataTable to hold the user data
+                var dataTable = new DataTable();
+                dataTable.Columns.Add("UserId");
+                dataTable.Columns.Add("DisplayName");
+                dataTable.Columns.Add("Mail");
+
+                // Iterate through all users and add them to the DataTable
+                foreach (var user in users.EnumerateArray())
+                {
+                    var userId = user.GetProperty("id").GetString();
+                    var displayName = user.GetProperty("displayName").GetString();
+                    var mail = user.GetProperty("mail").GetString();
+                    dataTable.Rows.Add(userId, displayName, mail);
+
+                    // Define the payload for the patch request
+                    var payload = new { passwordProfile = new { forceChangePasswordNextSignIn = true } };
+                    var payloadJSON = System.Text.Json.JsonSerializer.Serialize(payload);
+                    var patchContent = new StringContent(payloadJSON, Encoding.UTF8, "application/json");
+
+                    var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}")
+                    {
+                        Content = patchContent
+                    };
+                    graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                    var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+
+                    if (graphResponseMessage.StatusCode == HttpStatusCode.NoContent)
+                    {
+                        GraphResultsTextBox.Text += $"User {userId}: Password Successfully Expired\r\n";
+                    }
+                    else
+                    {
+                        using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                        GraphResultsTextBox.Text += $"User {userId}: " + System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }) + "\n";
+                    }
+                }
+
+                // Bind the DataTable to the DataGridView
+                GraphResultsDataGridView.DataSource = dataTable;
+
+                var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+
+                SignInCallToActionLabel.Hide();
+                GraphResultsPanel.Show();
+            }
+```
 
 # .NET | Windows Forms | user sign-in, protected web API access (Microsoft Graph) | Microsoft identity platform
 
