@@ -563,7 +563,7 @@ namespace MsalExample
             }
             if (TenantID.Text == Production && checkBox1.Checked == true)
             {
-                ExpirePasswords.Enabled = false; // Remove this line to Expire All Passwords
+                //ExpirePasswords.Enabled = false; // Remove this line to Expire All Passwords
             }
             if (TenantID.Text == Production && checkBox1.Checked == false && checkBox2.Checked == false)
             {
@@ -632,13 +632,13 @@ namespace MsalExample
             ExpirePasswords.Enabled = true;
             if (TenantID.Text == Production && checkBox1.Checked == true)
             {
-                ExpirePasswords.Enabled = false;
+                //ExpirePasswords.Enabled = false; // DISABLE FOR DANGEROUS BUILD
             }
             if (TenantID.Text == Production && checkBox2.Checked == true)
             {
-                ExpirePasswords.Enabled = false;
+                ExpirePasswords.Enabled = false; 
             }
-            if (checkBox1.Checked == true && checkBox2.Checked == true)
+            if (checkBox1.Checked == true && checkBox2.Checked == true) // ????? ANY POINT? NON POSSIBLE STATE!
             {
                 ExpirePasswords.Enabled = false;
             }
