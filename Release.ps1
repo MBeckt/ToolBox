@@ -5,7 +5,7 @@ param (
     [switch]$OnlyBuild=$false
 )
 
-$appName = "ReferAll Graph Toolbox" # 👈 Replace with your application project name.
+$appName = "ReferAll-Graph-Toolbox" # 👈 Replace with your application project name.
 $projDir = "." # 👈 Replace with your project directory (where .csproj resides).
 
 Set-StrictMode -version 2.0
