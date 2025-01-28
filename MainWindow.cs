@@ -30,7 +30,7 @@ namespace MsalExample
 
         public MainWindow()
         {
-            InitializeComponent(); 
+            InitializeComponent();
 
             // Configure your public client application
             msalPublicClientApp = PublicClientApplicationBuilder
@@ -145,7 +145,7 @@ namespace MsalExample
                 SignInCallToActionLabel.Hide();
                 GraphResultsPanel.Show();
 
-            foreach (var user in users)
+                foreach (var user in users)
                 {
                     var userId = user.GetProperty("id").GetString();
                     var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}")
@@ -391,7 +391,7 @@ namespace MsalExample
                     var email = textBox3.Text;
                     // Call Microsoft Graph using the access token acquired above.
                     using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + email + "'" + " and id/issuer eq " + IssueEnv + ")&$select=displayName,mail,identities,otherMails");// + email);
-                                                                                                                                                                                                                                                                                                       //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
+                                                                                                                                                                                                                                                                                           //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
                     graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
                     var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
                     //graphResponseMessage.EnsureSuccessStatusCode();
@@ -561,7 +561,7 @@ namespace MsalExample
             }
             if (checkBox2.Checked == true && checkBox1.Checked == false) // Hides Self Password Expiry on Production.
             {
-                if(TenantID.Text == Production) // || TenantID.Text == Staging
+                if (TenantID.Text == Production) // || TenantID.Text == Staging
                 {
                     ExpirePasswords.Enabled = false;
                 }
@@ -645,7 +645,7 @@ namespace MsalExample
             }
             if (TenantID.Text == Production && checkBox2.Checked == true)
             {
-                ExpirePasswords.Enabled = false; 
+                ExpirePasswords.Enabled = false;
             }
             if (checkBox1.Checked == true && checkBox2.Checked == true) // ????? ANY POINT? NON POSSIBLE STATE!
             {
@@ -709,6 +709,11 @@ namespace MsalExample
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Safety_CheckedChanged(object sender, EventArgs e)
         {
 
         }
