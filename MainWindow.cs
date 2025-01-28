@@ -715,7 +715,7 @@ namespace MsalExample
 
         private void Safety_CheckedChanged(object sender, EventArgs e)
         {
-
+            ExpirePasswords.Enabled = false;
         }
     }
 
