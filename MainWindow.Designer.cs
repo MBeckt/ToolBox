@@ -51,6 +51,7 @@ namespace MsalExample
             label7 = new Label();
             textBox3 = new TextBox();
             groupBox2 = new GroupBox();
+            Safety = new CheckBox();
             checkBox2 = new CheckBox();
             groupBox3 = new GroupBox();
             textBox5 = new TextBox();
@@ -63,7 +64,6 @@ namespace MsalExample
             label6 = new Label();
             groupBox4 = new GroupBox();
             toolTip1 = new ToolTip(components);
-            Safety = new CheckBox();
             ExitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
@@ -316,6 +316,17 @@ namespace MsalExample
             groupBox2.TabStop = false;
             groupBox2.Text = "Parameters";
             // 
+            // Safety
+            // 
+            Safety.AutoSize = true;
+            Safety.Location = new Point(371, 22);
+            Safety.Name = "Safety";
+            Safety.Size = new Size(58, 19);
+            Safety.TabIndex = 14;
+            Safety.Text = "Safety";
+            Safety.UseVisualStyleBackColor = true;
+            Safety.CheckedChanged += Safety_CheckedChanged;
+            // 
             // checkBox2
             // 
             checkBox2.AutoSize = true;
@@ -440,17 +451,6 @@ namespace MsalExample
             // toolTip1
             // 
             toolTip1.ToolTipTitle = "Email Takes Prescedence";
-            // 
-            // Safety
-            // 
-            Safety.AutoSize = true;
-            Safety.Location = new Point(349, 26);
-            Safety.Name = "Safety";
-            Safety.Size = new Size(58, 19);
-            Safety.TabIndex = 14;
-            Safety.Text = "Safety";
-            Safety.UseVisualStyleBackColor = true;
-            Safety.CheckedChanged += Safety_CheckedChanged;
             // 
             // MainWindow
             // 
