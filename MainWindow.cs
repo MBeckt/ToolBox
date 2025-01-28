@@ -15,11 +15,9 @@ using System.Net;
 using Azure.Core;
 using System.Data;
 using System.IO.Compression;
-using System.Diagnostics;
 
 namespace MsalExample
 {
-
     public partial class MainWindow : Form
     {
         private readonly HttpClient _httpClient = new();
@@ -33,31 +31,6 @@ namespace MsalExample
         public MainWindow()
         {
             InitializeComponent(); 
-
-            WebClient webClient = new WebClient(); // Updater
-            var client = new WebClient();
-            if (!webClient.DownloadString("link to web host/Version.txt").Contains("1.3.2.7"))
-            {
-                if (MessageBox.Show("A new update is available! Do you want to download it?", "Demo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    try
-                    {
-                        if (File.Exists(@".\ReferAllToolbox.msi")) { File.Delete(@".\ReferAllToolbox.msi"); }
-                        client.DownloadFile("link to web host/ReferAllToolbox.zip", @"ReferAllToolbox.zip");
-                        string zipPath = @".\ReferAllToolbox.zip";
-                        string extractPath = @".\";
-                        ZipFile.ExtractToDirectory(zipPath, extractPath);
-                        System.Diagnostics.Process process = new System.Diagnostics.Process();
-                        process.StartInfo.FileName = "msiexec.exe";
-                        process.StartInfo.Arguments = string.Format("/i ReferAllToolbox.msi");
-                        this.Close();
-                        process.Start();
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
 
             // Configure your public client application
             msalPublicClientApp = PublicClientApplicationBuilder
