@@ -5,8 +5,8 @@ param (
     [switch]$OnlyBuild=$false
 )
 
-$appName = "WpfApplication" # 👈 Replace with your application project name.
-$projDir = "WpfApplication" # 👈 Replace with your project directory (where .csproj resides).
+$appName = "ReferAll Graph Toolbox" # 👈 Replace with your application project name.
+$projDir = "C:\Users\MatthewBeckett\source\repos\Toolbox" # 👈 Replace with your project directory (where .csproj resides).
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
@@ -65,9 +65,9 @@ if ($OnlyBuild) {
 }
 
 # Clone `gh-pages` branch.
-$ghPagesDir = "gh-pages"
+$ghPagesDir = "Development"
 if (-Not (Test-Path $ghPagesDir)) {
-    git clone $(git config --get remote.origin.url) -b gh-pages `
+    git clone $(git config --get remote.origin.url) -b Development `
         --depth 1 --single-branch $ghPagesDir
 }
 
