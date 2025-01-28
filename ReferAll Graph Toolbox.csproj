@@ -10,6 +10,7 @@
 	<ApplicationIcon>SAA Wrench128.ico</ApplicationIcon>
 	<Copyright>ReferAll Ltd.</Copyright>
 	<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+	<BaseOutputPath>C:\Users\MatthewBeckett\source\repos\Expire-All-Passwords\published</BaseOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="SAA Wrench128.ico" />
