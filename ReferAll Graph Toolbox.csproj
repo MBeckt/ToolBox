@@ -5,14 +5,11 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <BaseOutputPath></BaseOutputPath>
 	<PublishSingleFile>true</PublishSingleFile>
 	<DebugType>embedded</DebugType>
 	<ApplicationIcon>SAA Wrench128.ico</ApplicationIcon>
 	<Copyright>ReferAll Ltd.</Copyright>
-	<FileVersion>1.3.2.7</FileVersion>
-	<AssemblyVersion>1.3.2.7</AssemblyVersion>
-	<AssemblyName>$(MSBuildProjectName) $(AssemblyVersion)</AssemblyName>
+	<AssemblyName>$(MSBuildProjectName)</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="SAA Wrench128.ico" />
