@@ -1,12 +1,12 @@
-﻿# From https://janjones.me/posts/clickonce-installer-build-publish-github/.
+# From https://janjones.me/posts/clickonce-installer-build-publish-github/.
 
 [CmdletBinding(PositionalBinding=$false)]
 param (
     [switch]$OnlyBuild=$false
 )
 
-$appName = "ReferAll Graph Toolbox" # 👈 Replace with your application project name.
-$projDir = "ReferAll Graph Toolbox" # 👈 Replace with your project directory (where .csproj resides).
+$appName = "ReferAll-Graph-Toolbox" # 👈 Replace with your application project name.
+$projDir = "./" # 👈 Replace with your project directory (where .csproj resides).
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
