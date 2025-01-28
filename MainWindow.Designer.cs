@@ -64,7 +64,6 @@ namespace MsalExample
             label6 = new Label();
             groupBox4 = new GroupBox();
             toolTip1 = new ToolTip(components);
-            checkBox3 = new CheckBox();
             ExitButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
@@ -306,7 +305,6 @@ namespace MsalExample
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(checkBox3);
             groupBox2.Controls.Add(Safety);
             groupBox2.Controls.Add(checkBox2);
             groupBox2.Controls.Add(groupBox3);
@@ -455,17 +453,6 @@ namespace MsalExample
             // 
             toolTip1.ToolTipTitle = "Email Takes Prescedence";
             // 
-            // checkBox3
-            // 
-            checkBox3.AutoSize = true;
-            checkBox3.Enabled = false;
-            checkBox3.Location = new Point(213, 5);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(101, 19);
-            checkBox3.TabIndex = 15;
-            checkBox3.Text = "TEST REMOVE";
-            checkBox3.UseVisualStyleBackColor = true;
-            // 
             // MainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -539,6 +526,5 @@ namespace MsalExample
         public Button LookupUser;
         public Button DeleteUser;
         private CheckBox Safety;
-        private CheckBox checkBox3;
     }
 }
