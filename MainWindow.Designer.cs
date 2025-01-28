@@ -319,6 +319,7 @@ namespace MsalExample
             // Safety
             // 
             Safety.AutoSize = true;
+            Safety.Enabled = false;
             Safety.Location = new Point(371, 22);
             Safety.Name = "Safety";
             Safety.Size = new Size(58, 19);
