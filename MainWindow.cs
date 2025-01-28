@@ -14,6 +14,8 @@ using Newtonsoft.Json;
 using System.Net;
 using Azure.Core;
 using System.Data;
+using System.IO.Compression;
+using System.Diagnostics;
 
 namespace MsalExample
 {
@@ -30,7 +32,32 @@ namespace MsalExample
 
         public MainWindow()
         {
-            InitializeComponent(); /// MAKE THIS INVOCABLE
+            InitializeComponent(); 
+
+            WebClient webClient = new WebClient(); // Updater
+            var client = new WebClient();
+            if (!webClient.DownloadString("link to web host/Version.txt").Contains("1.3.2.7"))
+            {
+                if (MessageBox.Show("A new update is available! Do you want to download it?", "Demo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        if (File.Exists(@".\ReferAllToolbox.msi")) { File.Delete(@".\ReferAllToolbox.msi"); }
+                        client.DownloadFile("link to web host/ReferAllToolbox.zip", @"ReferAllToolbox.zip");
+                        string zipPath = @".\ReferAllToolbox.zip";
+                        string extractPath = @".\";
+                        ZipFile.ExtractToDirectory(zipPath, extractPath);
+                        System.Diagnostics.Process process = new System.Diagnostics.Process();
+                        process.StartInfo.FileName = "msiexec.exe";
+                        process.StartInfo.Arguments = string.Format("/i ReferAllToolbox.msi");
+                        this.Close();
+                        process.Start();
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
 
             // Configure your public client application
             msalPublicClientApp = PublicClientApplicationBuilder
@@ -122,21 +149,31 @@ namespace MsalExample
             // Get all users in the tenant
             if (checkBox1.Checked == true && checkBox2.Checked == false)
             {
-                var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
-                usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-                var usersResponse = await _httpClient.SendAsync(usersRequest);
-                usersResponse.EnsureSuccessStatusCode();
-                var usersJson = await usersResponse.Content.ReadAsStringAsync();
-                var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+                var usersRequestUrl = "https://graph.microsoft.com/v1.0/users";
+                var users = new List<JsonElement>();
 
-                // Define the payload for the patch request
+                while (!string.IsNullOrEmpty(usersRequestUrl))
+                {
+                    var usersRequest = new HttpRequestMessage(HttpMethod.Get, usersRequestUrl);
+                    usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                    var usersResponse = await _httpClient.SendAsync(usersRequest);
+                    usersResponse.EnsureSuccessStatusCode();
+                    var usersJson = await usersResponse.Content.ReadAsStringAsync();
+                    var usersDocument = JsonDocument.Parse(usersJson);
+                    users.AddRange(usersDocument.RootElement.GetProperty("value").EnumerateArray());
+
+                    usersRequestUrl = usersDocument.RootElement.TryGetProperty("@odata.nextLink", out var nextLink) ? nextLink.GetString() : null;
+                }
+
                 var payload = new { passwordProfile = new { forceChangePasswordNextSignIn = true } };
                 var payloadJSON = System.Text.Json.JsonSerializer.Serialize(payload);
                 var patchContent = new StringContent(payloadJSON, Encoding.UTF8, "application/json");
 
-                // Iterate through all users and apply the patch
-                foreach (var user in users.EnumerateArray()) // https://learn.microsoft.com/en-us/answers/questions/715354/how-to-display-json-data-into-gridview
-                {                                           // https://stackoverflow.com/questions/23763446/how-to-display-json-data-in-a-datagridview-in-winforms
+                SignInCallToActionLabel.Hide();
+                GraphResultsPanel.Show();
+
+            foreach (var user in users)
+                {
                     var userId = user.GetProperty("id").GetString();
                     var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}")
                     {
@@ -145,7 +182,6 @@ namespace MsalExample
                     graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
                     var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
 
-                    // Check for 204 No Content response
                     if (graphResponseMessage.StatusCode == HttpStatusCode.NoContent)
                     {
                         GraphResultsTextBox.Text += $"User {userId}: Password Successfully Expired\r\n";
@@ -158,8 +194,7 @@ namespace MsalExample
                     var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                     AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
                 }
-                // Parsing HTTP response code var httpResponseCode = (int)graphResponseMessage.StatusCode; HttpResponseCodeLabel.Text = $"HTTP Response Code: {httpResponseCode}"
-                // Hide the call to action and show the results.
+
                 SignInCallToActionLabel.Hide();
                 GraphResultsPanel.Show();
             }
