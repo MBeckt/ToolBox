@@ -12,7 +12,7 @@
 	<Copyright>ReferAll Ltd.</Copyright>
 	<FileVersion>1.4.0.0</FileVersion>
 	<AssemblyVersion>1.4.0.0</AssemblyVersion>
-	<AssemblyName>$(MSBuildProjectName) $(AssemblyVersion)</AssemblyName>
+	<AssemblyName>$(MSBuildProjectName)-$(AssemblyVersion)</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="SAA Wrench128.ico" />
