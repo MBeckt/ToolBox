@@ -51,6 +51,7 @@ namespace MsalExample
             label7 = new Label();
             textBox3 = new TextBox();
             groupBox2 = new GroupBox();
+            checkBox3 = new CheckBox();
             Safety = new CheckBox();
             checkBox2 = new CheckBox();
             groupBox3 = new GroupBox();
@@ -305,6 +306,7 @@ namespace MsalExample
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(checkBox3);
             groupBox2.Controls.Add(Safety);
             groupBox2.Controls.Add(checkBox2);
             groupBox2.Controls.Add(groupBox3);
@@ -316,11 +318,22 @@ namespace MsalExample
             groupBox2.TabStop = false;
             groupBox2.Text = "Parameters";
             // 
+            // checkBox3
+            // 
+            checkBox3.AutoSize = true;
+            checkBox3.Enabled = false;
+            checkBox3.Location = new Point(373, 22);
+            checkBox3.Name = "checkBox3";
+            checkBox3.Size = new Size(82, 19);
+            checkBox3.TabIndex = 15;
+            checkBox3.Text = "checkBox3";
+            checkBox3.UseVisualStyleBackColor = true;
+            // 
             // Safety
             // 
             Safety.AutoSize = true;
             Safety.Enabled = false;
-            Safety.Location = new Point(371, 22);
+            Safety.Location = new Point(334, 22);
             Safety.Name = "Safety";
             Safety.Size = new Size(58, 19);
             Safety.TabIndex = 14;
@@ -526,5 +539,6 @@ namespace MsalExample
         public Button LookupUser;
         public Button DeleteUser;
         private CheckBox Safety;
+        private CheckBox checkBox3;
     }
 }
