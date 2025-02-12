@@ -42,7 +42,11 @@ namespace MsalExample
             ExpirePasswords = new Button();
             SignInCallToActionLabel = new Label();
             GraphResultsPanel = new Panel();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
             GraphResultsTextBox = new TextBox();
+            tabPage2 = new TabPage();
+            GraphResultsDataGridView = new DataGridView();
             TenantID = new TextBox();
             ClientId = new TextBox();
             button3 = new Button();
@@ -70,6 +74,10 @@ namespace MsalExample
             label1 = new Label();
             tableLayoutPanel1.SuspendLayout();
             GraphResultsPanel.SuspendLayout();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)GraphResultsDataGridView).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -207,8 +215,8 @@ namespace MsalExample
             // GraphResultsPanel
             // 
             GraphResultsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            GraphResultsPanel.Controls.Add(tabControl1);
             GraphResultsPanel.Controls.Add(label1);
-            GraphResultsPanel.Controls.Add(GraphResultsTextBox);
             GraphResultsPanel.Controls.Add(tableLayoutPanel1);
             GraphResultsPanel.Location = new Point(8, 222);
             GraphResultsPanel.Margin = new Padding(2);
@@ -217,18 +225,59 @@ namespace MsalExample
             GraphResultsPanel.TabIndex = 1;
             GraphResultsPanel.Visible = false;
             // 
+            // tabControl1
+            // 
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Location = new Point(4, 18);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(655, 253);
+            tabControl1.TabIndex = 4;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(GraphResultsTextBox);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(647, 225);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Forms Text Box";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
             // GraphResultsTextBox
             // 
             GraphResultsTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            GraphResultsTextBox.Location = new Point(9, 15);
+            GraphResultsTextBox.Location = new Point(-4, 0);
             GraphResultsTextBox.Margin = new Padding(2);
             GraphResultsTextBox.Multiline = true;
             GraphResultsTextBox.Name = "GraphResultsTextBox";
             GraphResultsTextBox.ReadOnly = true;
             GraphResultsTextBox.ScrollBars = ScrollBars.Both;
-            GraphResultsTextBox.Size = new Size(659, 257);
+            GraphResultsTextBox.Size = new Size(655, 229);
             GraphResultsTextBox.TabIndex = 1;
             GraphResultsTextBox.TextChanged += GraphResultsTextBox_TextChanged;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(GraphResultsDataGridView);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(647, 225);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Data Grid View";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // GraphResultsDataGridView
+            // 
+            GraphResultsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            GraphResultsDataGridView.Location = new Point(0, 0);
+            GraphResultsDataGridView.Name = "GraphResultsDataGridView";
+            GraphResultsDataGridView.Size = new Size(647, 225);
+            GraphResultsDataGridView.TabIndex = 3;
+            GraphResultsDataGridView.CellContentClick += dataGridView1_CellContentClick;
             // 
             // TenantID
             // 
@@ -478,6 +527,11 @@ namespace MsalExample
             tableLayoutPanel1.PerformLayout();
             GraphResultsPanel.ResumeLayout(false);
             GraphResultsPanel.PerformLayout();
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)GraphResultsDataGridView).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -526,5 +580,9 @@ namespace MsalExample
         public Button LookupUser;
         public Button DeleteUser;
         private CheckBox Safety;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private DataGridView GraphResultsDataGridView;
     }
 }

@@ -22,6 +22,7 @@ namespace MsalExample
     {
         private readonly HttpClient _httpClient = new();
 
+
         // In order to take advantage of token caching, your MSAL client singleton must
         // have a lifecycle that at least matches the lifecycle of the user's session in
         // the application. In this sample, the lifecycle of the MSAL client is tied to
@@ -118,8 +119,72 @@ namespace MsalExample
                     .ExecuteAsync();
             }
 
+
+
+
+            // Trying to use GRIDview for Large Lists and Better Display
+            if (checkBox1.Checked == true && checkBox2.Checked == false)
+            {
+                var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
+                usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var usersResponse = await _httpClient.SendAsync(usersRequest);
+                usersResponse.EnsureSuccessStatusCode();
+                var usersJson = await usersResponse.Content.ReadAsStringAsync();
+                var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+
+                // Create a DataTable to hold the user data
+                var dataTable = new DataTable();
+                dataTable.Columns.Add("UserId");
+                dataTable.Columns.Add("DisplayName");
+                dataTable.Columns.Add("Mail");
+
+                // Iterate through all users and add them to the DataTable
+                foreach (var user in users.EnumerateArray())
+                {
+                    var userId = user.GetProperty("id").GetString();
+                    var displayName = user.GetProperty("displayName").GetString();
+                    var mail = user.GetProperty("mail").GetString();
+                    dataTable.Rows.Add(userId, displayName, mail);
+
+                    // Define the payload for the patch request
+                    var payload = new { passwordProfile = new { forceChangePasswordNextSignIn = true } };
+                    var payloadJSON = System.Text.Json.JsonSerializer.Serialize(payload);
+                    var patchContent = new StringContent(payloadJSON, Encoding.UTF8, "application/json");
+
+                    var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}")
+                    {
+                        Content = patchContent
+                    };
+                    graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                    var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+
+                    if (graphResponseMessage.StatusCode == HttpStatusCode.NoContent)
+                    {
+                        GraphResultsTextBox.Text += $"User {userId}: Password Successfully Expired\r\n";
+                    }
+                    else
+                    {
+                        using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
+                        GraphResultsTextBox.Text += $"User {userId}: " + System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }) + "\n";
+                    }
+                }
+
+                // Bind the DataTable to the DataGridView
+                GraphResultsDataGridView.DataSource = dataTable;
+
+                var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
+                AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+
+                SignInCallToActionLabel.Hide();
+                GraphResultsPanel.Show();
+            }
+
+            // THIS WORKS ON MULTIPLE THOUSANDS, IT IS ACTUALLY CONFIGURED PROPERLY.
+            // I WANT TO USE GRID VIEW ABOVE.
+            // Hiding While working on Above GRID VIEW
             // Call Microsoft Graph using the access token acquired above.
             // Get all users in the tenant
+            /*
             if (checkBox1.Checked == true && checkBox2.Checked == false)
             {
                 var usersRequestUrl = "https://graph.microsoft.com/v1.0/users";
@@ -171,6 +236,9 @@ namespace MsalExample
                 SignInCallToActionLabel.Hide();
                 GraphResultsPanel.Show();
             }
+            */
+
+
             if (checkBox1.Checked == false && checkBox2.Checked == false)
             {
                 if (!string.IsNullOrEmpty(textBox3.Text))
@@ -222,6 +290,29 @@ namespace MsalExample
                         SignInCallToActionLabel.Hide();
                         GraphResultsPanel.Show();
                     }
+                    //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!? // EXPIREY ATTEMPT 2
+                    usersResponse.EnsureSuccessStatusCode();
+
+                    // Create a DataTable to hold the user data
+                    var dataTable = new DataTable();
+                    dataTable.Columns.Add("UserId");
+                    dataTable.Columns.Add("DisplayName");
+                    dataTable.Columns.Add("Mail");
+
+                    // Iterate through all users and add them to the DataTable
+                    foreach (var user in users.EnumerateArray())
+                    {
+                        var userId = user.GetProperty("id").GetString();
+                        var displayName = user.GetProperty("displayName").GetString();
+                        var mail = user.GetProperty("mail").GetString();
+                        dataTable.Rows.Add(userId, displayName, mail);
+
+                        // Define the payload for the patch request if expiring passwrods
+                    }
+                    // Bind the DataTable to the DataGridView
+                    GraphResultsDataGridView.DataSource = dataTable;
+                    SignInCallToActionLabel.Hide();
+                    GraphResultsPanel.Show();
                 }
                 if (!string.IsNullOrEmpty(textBox4.Text))
                 {
@@ -267,6 +358,29 @@ namespace MsalExample
                         SignInCallToActionLabel.Hide();
                         GraphResultsPanel.Show();
                     }
+                    //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!? // EXPIREY ATTEMPT 2
+                    usersResponse.EnsureSuccessStatusCode();
+
+                    // Create a DataTable to hold the user data
+                    var dataTable = new DataTable();
+                    dataTable.Columns.Add("UserId");
+                    dataTable.Columns.Add("DisplayName");
+                    dataTable.Columns.Add("Mail");
+
+                    // Iterate through all users and add them to the DataTable
+                    foreach (var user in users.EnumerateArray())
+                    {
+                        var userId = user.GetProperty("id").GetString();
+                        var displayName = user.GetProperty("displayName").GetString();
+                        var mail = user.GetProperty("mail").GetString();
+                        dataTable.Rows.Add(userId, displayName, mail);
+
+                        // Define the payload for the patch request if expiring passwrods
+                    }
+                    // Bind the DataTable to the DataGridView
+                    GraphResultsDataGridView.DataSource = dataTable;
+                    SignInCallToActionLabel.Hide();
+                    GraphResultsPanel.Show();
                 }
             }
             if (checkBox1.Checked == false && checkBox2.Checked == true)
@@ -310,7 +424,32 @@ namespace MsalExample
                     // Hide the call to action and show the results.
                     SignInCallToActionLabel.Hide();
                     GraphResultsPanel.Show();
+
                 }
+
+                //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!? // EXPIREY ATTEMPT 2
+                usersResponse.EnsureSuccessStatusCode();
+
+                // Create a DataTable to hold the user data
+                var dataTable = new DataTable();
+                dataTable.Columns.Add("UserId");
+                dataTable.Columns.Add("DisplayName");
+                dataTable.Columns.Add("Mail");
+
+                // Iterate through all users and add them to the DataTable
+                foreach (var user in users.EnumerateArray())
+                {
+                    var userId = user.GetProperty("id").GetString();
+                    var displayName = user.GetProperty("displayName").GetString();
+                    var mail = user.GetProperty("mail").GetString();
+                    dataTable.Rows.Add(userId, displayName, mail);
+
+                    // Define the payload for the patch request if expiring passwrods
+                }
+                // Bind the DataTable to the DataGridView
+                GraphResultsDataGridView.DataSource = dataTable;
+                SignInCallToActionLabel.Hide();
+                GraphResultsPanel.Show();
             }
         }
         // Find USERS by EMAIL
@@ -363,6 +502,7 @@ namespace MsalExample
 
             if (checkBox1.Checked == true && checkBox2.Checked == false)
             {
+                //More Efficient, less friendlly UI
                 // Call Microsoft Graph using the access token acquired above.
                 using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
                 graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
@@ -376,9 +516,37 @@ namespace MsalExample
                 AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
 
                 // Hide the call to action and show the results.
+                //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!? || THISS WORKS BUT EVERY OTHER REQUEST FUCKING DIES AAAAAAAAAA
+                var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users");
+                usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var usersResponse = await _httpClient.SendAsync(usersRequest);
+                usersResponse.EnsureSuccessStatusCode();
+                var usersJson = await usersResponse.Content.ReadAsStringAsync();
+                var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
 
+                
+                // Create a DataTable to hold the user data
+                var dataTable = new DataTable();
+                dataTable.Columns.Add("UserId");
+                dataTable.Columns.Add("DisplayName");
+                dataTable.Columns.Add("Mail");
 
+                // Iterate through all users and add them to the DataTable
+                foreach (var user in users.EnumerateArray())
+                {
+                    var userId = user.GetProperty("id").GetString();
+                    var displayName = user.GetProperty("displayName").GetString();
+                    var mail = user.GetProperty("mail").GetString();
+                    dataTable.Rows.Add(userId, displayName, mail);
+
+                    // Define the payload for the patch request if expiring passwrods
+                }
+                // Bind the DataTable to the DataGridView
+                GraphResultsDataGridView.DataSource = dataTable;
+                SignInCallToActionLabel.Hide();
+                GraphResultsPanel.Show();
             }
+
             if (checkBox1.Checked == false && checkBox2.Checked == false)
             {
                 var IssueEnv = "'ReferallProduction.onmicrosoft'";
@@ -394,6 +562,7 @@ namespace MsalExample
                                                                                                                                                                                                                                                                                            //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
                     graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
                     var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
+                    graphResponseMessage.EnsureSuccessStatusCode();
                     //graphResponseMessage.EnsureSuccessStatusCode();
 
                     // Present the results to the user (formatting the json for readability)
@@ -401,6 +570,34 @@ namespace MsalExample
                     GraphResultsTextBox.Text += System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
                     var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                     AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+
+                    //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!?
+                    graphResponseMessage.EnsureSuccessStatusCode();
+                    var usersJson = await graphResponseMessage.Content.ReadAsStringAsync();
+                    var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+
+
+                    // Create a DataTable to hold the user data
+                    var dataTable = new DataTable();
+                    dataTable.Columns.Add("UserId");
+                    dataTable.Columns.Add("DisplayName");
+                    dataTable.Columns.Add("Mail");
+
+                    // Iterate through all users and add them to the DataTable
+                    foreach (var user in users.EnumerateArray())
+                    {
+                        var userId = user.GetProperty("id").GetString();
+                        var displayName = user.GetProperty("displayName").GetString();
+                        var mail = user.GetProperty("mail").GetString();
+                        dataTable.Rows.Add(userId, displayName, mail);
+
+                        // Define the payload for the patch request if expiring passwrods
+                    }
+                    // Bind the DataTable to the DataGridView
+                    GraphResultsDataGridView.DataSource = dataTable;
+                    SignInCallToActionLabel.Hide();
+                    GraphResultsPanel.Show();
+
                 }
                 if (!string.IsNullOrEmpty(textBox4.Text))
                 {
@@ -417,6 +614,33 @@ namespace MsalExample
                     GraphResultsTextBox.Text += System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
                     var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                     AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+
+                    //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!?
+                    graphResponseMessage.EnsureSuccessStatusCode();
+                    var usersJson = await graphResponseMessage.Content.ReadAsStringAsync();
+                    var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+
+
+                    // Create a DataTable to hold the user data
+                    var dataTable = new DataTable();
+                    dataTable.Columns.Add("UserId");
+                    dataTable.Columns.Add("DisplayName");
+                    dataTable.Columns.Add("Mail");
+
+                    // Iterate through all users and add them to the DataTable
+                    foreach (var user in users.EnumerateArray())
+                    {
+                        var userId = user.GetProperty("id").GetString();
+                        var displayName = user.GetProperty("displayName").GetString();
+                        var mail = user.GetProperty("mail").GetString();
+                        dataTable.Rows.Add(userId, displayName, mail);
+
+                        // Define the payload for the patch request if expiring passwrods
+                    }
+                    // Bind the DataTable to the DataGridView
+                    GraphResultsDataGridView.DataSource = dataTable;
+                    SignInCallToActionLabel.Hide();
+                    GraphResultsPanel.Show();
                 }
             }
             if (checkBox1.Checked == false && checkBox2.Checked == true)
@@ -433,6 +657,33 @@ namespace MsalExample
                 GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
                 var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                 AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+
+                //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!?
+                graphResponseMessage.EnsureSuccessStatusCode();
+                var usersJson = await graphResponseMessage.Content.ReadAsStringAsync();
+                var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+
+
+                // Create a DataTable to hold the user data
+                var dataTable = new DataTable();
+                dataTable.Columns.Add("UserId");
+                dataTable.Columns.Add("DisplayName");
+                dataTable.Columns.Add("Mail");
+
+                // Iterate through all users and add them to the DataTable
+                foreach (var user in users.EnumerateArray())
+                {
+                    var userId = user.GetProperty("id").GetString();
+                    var displayName = user.GetProperty("displayName").GetString();
+                    var mail = user.GetProperty("mail").GetString();
+                    dataTable.Rows.Add(userId, displayName, mail);
+
+                    // Define the payload for the patch request if expiring passwrods
+                }
+                // Bind the DataTable to the DataGridView
+                GraphResultsDataGridView.DataSource = dataTable;
+                SignInCallToActionLabel.Hide();
+                GraphResultsPanel.Show();
             }
 
 
@@ -450,6 +701,34 @@ namespace MsalExample
                 GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
                 var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                 AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+
+
+                //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!?
+                graphResponseMessage.EnsureSuccessStatusCode();
+                var usersJson = await graphResponseMessage.Content.ReadAsStringAsync();
+                var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+
+
+                // Create a DataTable to hold the user data
+                var dataTable = new DataTable();
+                dataTable.Columns.Add("UserId");
+                dataTable.Columns.Add("DisplayName");
+                dataTable.Columns.Add("Mail");
+
+                // Iterate through all users and add them to the DataTable
+                foreach (var user in users.EnumerateArray())
+                {
+                    var userId = user.GetProperty("id").GetString();
+                    var displayName = user.GetProperty("displayName").GetString();
+                    var mail = user.GetProperty("mail").GetString();
+                    dataTable.Rows.Add(userId, displayName, mail);
+
+                    // Define the payload for the patch request if expiring passwrods
+                }
+                // Bind the DataTable to the DataGridView
+                GraphResultsDataGridView.DataSource = dataTable;
+                SignInCallToActionLabel.Hide();
+                GraphResultsPanel.Show();
             }
             SignInCallToActionLabel.Hide();
             GraphResultsPanel.Show();
@@ -493,7 +772,7 @@ namespace MsalExample
                     new[] { "https://graph.microsoft.com/User.Read" })
                     .ExecuteAsync();
             }
-            if (!string.IsNullOrEmpty(textBox4.Text))
+            if (!string.IsNullOrEmpty(textBox4.Text)) // USE RECURSIVE PATCHING WHEN IT COMES TO FIXING
             {
                 using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/beta/users/" + textBox4.Text);
 
@@ -504,6 +783,34 @@ namespace MsalExample
                 GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
                 var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                 AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+
+                //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!?
+                graphResponseMessage.EnsureSuccessStatusCode();
+                var usersJson = await graphResponseMessage.Content.ReadAsStringAsync();
+                var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+
+
+                // Create a DataTable to hold the user data
+                var dataTable = new DataTable();
+                dataTable.Columns.Add("UserId");
+                dataTable.Columns.Add("DisplayName");
+                dataTable.Columns.Add("Mail");
+
+                // Iterate through all users and add them to the DataTable
+                foreach (var user in users.EnumerateArray())
+                {
+                    var userId = user.GetProperty("id").GetString();
+                    var displayName = user.GetProperty("displayName").GetString();
+                    var mail = user.GetProperty("mail").GetString();
+                    dataTable.Rows.Add(userId, displayName, mail);
+
+                    // Define the payload for the patch request if expiring passwrods
+                }
+                // Bind the DataTable to the DataGridView
+                GraphResultsDataGridView.DataSource = dataTable;
+                SignInCallToActionLabel.Hide();
+                GraphResultsPanel.Show();
+
             }
             if (!string.IsNullOrEmpty(textBox3.Text))
             {
@@ -516,6 +823,33 @@ namespace MsalExample
                 GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
                 var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                 AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
+
+                //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!?
+                graphResponseMessage.EnsureSuccessStatusCode();
+                var usersJson = await graphResponseMessage.Content.ReadAsStringAsync();
+                var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+
+
+                // Create a DataTable to hold the user data
+                var dataTable = new DataTable();
+                dataTable.Columns.Add("UserId");
+                dataTable.Columns.Add("DisplayName");
+                dataTable.Columns.Add("Mail");
+
+                // Iterate through all users and add them to the DataTable
+                foreach (var user in users.EnumerateArray())
+                {
+                    var userId = user.GetProperty("id").GetString();
+                    var displayName = user.GetProperty("displayName").GetString();
+                    var mail = user.GetProperty("mail").GetString();
+                    dataTable.Rows.Add(userId, displayName, mail);
+
+                    // Define the payload for the patch request if expiring passwrods
+                }
+                // Bind the DataTable to the DataGridView
+                GraphResultsDataGridView.DataSource = dataTable;
+                SignInCallToActionLabel.Hide();
+                GraphResultsPanel.Show();
             }
         }
 
@@ -716,6 +1050,11 @@ namespace MsalExample
         private void Safety_CheckedChanged(object sender, EventArgs e)
         {
             ExpirePasswords.Enabled = false;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 
