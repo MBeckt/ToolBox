@@ -426,7 +426,7 @@ namespace MsalExample
                     GraphResultsPanel.Show();
 
                 }
-
+                /*
                 //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!? // EXPIREY ATTEMPT 2
                 usersResponse.EnsureSuccessStatusCode();
 
@@ -447,7 +447,7 @@ namespace MsalExample
                     // Define the payload for the patch request if expiring passwrods
                 }
                 // Bind the DataTable to the DataGridView
-                GraphResultsDataGridView.DataSource = dataTable;
+                GraphResultsDataGridView.DataSource = dataTable;*/
                 SignInCallToActionLabel.Hide();
                 GraphResultsPanel.Show();
             }
@@ -659,7 +659,7 @@ namespace MsalExample
                 AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
 
                 //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!?
-                graphResponseMessage.EnsureSuccessStatusCode();
+                /* graphResponseMessage.EnsureSuccessStatusCode();
                 var usersJson = await graphResponseMessage.Content.ReadAsStringAsync();
                 var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
 
@@ -681,7 +681,7 @@ namespace MsalExample
                     // Define the payload for the patch request if expiring passwrods
                 }
                 // Bind the DataTable to the DataGridView
-                GraphResultsDataGridView.DataSource = dataTable;
+                GraphResultsDataGridView.DataSource = dataTable;*/
                 SignInCallToActionLabel.Hide();
                 GraphResultsPanel.Show();
             }
