@@ -355,7 +355,7 @@ namespace MsalExample
                 foreach (var user in users.EnumerateArray())
                 {
                     var userId = user.GetProperty("id").GetString();
-                    var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/users/{userId}")
+                    var graphRequest = new HttpRequestMessage(HttpMethod.Patch, $"https://graph.microsoft.com/v1.0/me")
                     {
                         Content = patchContent
                     };
@@ -380,7 +380,7 @@ namespace MsalExample
                     GraphResultsPanel.Show();
 
                 }
-                /*
+                
                 //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!? // EXPIREY ATTEMPT 2
                 usersResponse.EnsureSuccessStatusCode();
 
@@ -401,7 +401,7 @@ namespace MsalExample
                     // Define the payload for the patch request if expiring passwrods
                 }
                 // Bind the DataTable to the DataGridView
-                GraphResultsDataGridView.DataSource = dataTable;*/
+                GraphResultsDataGridView.DataSource = dataTable;
                 SignInCallToActionLabel.Hide();
                 GraphResultsPanel.Show();
             }
@@ -529,130 +529,58 @@ namespace MsalExample
                 }
                 if (!string.IsNullOrEmpty(textBox3.Text))
                 {
-                    var email = textBox3.Text;
-                    // Call Microsoft Graph using the access token acquired above.
-                    using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users?$filter=identities/any(id:id/issuerAssignedId eq " + "'" + email + "'" + " and id/issuer eq " + IssueEnv + ")&$select=id,displayName,mail,identities,otherMails");// + email);
-                                                                                                                                                                                                                                                                                           //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
-                    graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-                    var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
-                    graphResponseMessage.EnsureSuccessStatusCode();
-                    //graphResponseMessage.EnsureSuccessStatusCode();
-
-                    // Present the results to the user (formatting the json for readability)
-                    using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
-                    GraphResultsTextBox.Text += System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
-                    var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
-                    AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
-
-                    //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!?
-                    graphResponseMessage.EnsureSuccessStatusCode();
-                    var usersJson = await graphResponseMessage.Content.ReadAsStringAsync();
-                    var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
-
-
-                    // Create a DataTable to hold the user data
-                    var dataTable = new DataTable();
-                    dataTable.Columns.Add("UserId");
-                    dataTable.Columns.Add("DisplayName");
-                    dataTable.Columns.Add("Mail");
-
-                    // Iterate through all users and add them to the DataTable
-                    foreach (var user in users.EnumerateArray())
-                    {
-                        var userId = user.GetProperty("id").GetString();
-                        var displayName = user.GetProperty("displayName").GetString();
-                        var mail = user.GetProperty("mail").GetString();
-                        dataTable.Rows.Add(userId, displayName, mail);
-
-                        // Define the payload for the patch request if expiring passwrods
-                    }
-                    // Bind the DataTable to the DataGridView
-                    GraphResultsDataGridView.DataSource = dataTable;
-                    SignInCallToActionLabel.Hide();
-                    GraphResultsPanel.Show();
+                    //FUYCKED THIS UP
 
                 }
                 if (!string.IsNullOrEmpty(textBox4.Text))
                 {
-                    var objectID = textBox4.Text;
-                    // Call Microsoft Graph using the access token acquired above.
-                    using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/users/" + objectID + "?$select=id,displayName,mail,identities,otherMails");
-                    //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
-                    graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-                    var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
-                    //graphResponseMessage.EnsureSuccessStatusCode();
-
-                    // Present the results to the user (formatting the json for readability)
-                    using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
-                    GraphResultsTextBox.Text += System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
-                    var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
-                    AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
-
-                    //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!?
-                    graphResponseMessage.EnsureSuccessStatusCode();
-                    //var usersJson = await graphResponseMessage.Content.ReadAsStringAsync();
-                    var users = graphResponseJson.RootElement; // FUCK COLLECTIONS :)
-
-                    // Create a DataTable to hold the user data
-                    var dataTable = new DataTable();
-                    dataTable.Columns.Add("UserId");
-                    dataTable.Columns.Add("DisplayName");
-                    dataTable.Columns.Add("Mail");
-
-                        var userId = users.GetProperty("id").GetString();
-                        var displayName = users.GetProperty("displayName").GetString();
-                        var mail = users.GetProperty("mail").GetString();
-                        dataTable.Rows.Add(userId, displayName, mail);
-
-                    // Bind the DataTable to the DataGridView
-                    GraphResultsDataGridView.DataSource = dataTable;
-                    SignInCallToActionLabel.Hide();
-                    GraphResultsPanel.Show();
+                    //FUYCKED THIS UP
                 }
             }
             if (checkBox1.Checked == false && checkBox2.Checked == true)
             {
-                // Call Microsoft Graph using the access token acquired above.
-                using var graphRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/me");// + email);
-                                                                                                                       //https://graph.microsoft.com/beta/tenant.onmicrosoft.com/users?$filter=(identities/any(i:i/issuer eq 'tenant.onmicrosoft.com' and i/issuerAssignedId eq 'johnsmith'))
-                graphRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
-                var graphResponseMessage = await _httpClient.SendAsync(graphRequest);
-                //graphResponseMessage.EnsureSuccessStatusCode();
-
-                // Present the results to the user (formatting the json for readability)
-                using var graphResponseJson = JsonDocument.Parse(await graphResponseMessage.Content.ReadAsStreamAsync());
-                GraphResultsTextBox.Text = System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                var usersRequest = new HttpRequestMessage(HttpMethod.Get, "https://graph.microsoft.com/v1.0/me?$select=id,displayName,mail,identities,otherMails");
+                usersRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", msalAuthenticationResult.AccessToken);
+                var usersResponse = await _httpClient.SendAsync(usersRequest);
+                usersResponse.EnsureSuccessStatusCode();
+                
+                using var graphResponseJson = JsonDocument.Parse(await usersResponse.Content.ReadAsStreamAsync());
+                GraphResultsTextBox.Text += System.Text.Json.JsonSerializer.Serialize(graphResponseJson, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
                 var tokenWasFromCache = TokenSource.Cache == msalAuthenticationResult.AuthenticationResultMetadata.TokenSource;
                 AccessTokenSourceLabel.Text = $"{(tokenWasFromCache ? "Cached" : "Newly Acquired")} (Expires: {msalAuthenticationResult.ExpiresOn:R})";
 
-                //NEW SHIT ATTEMPT // FUCKING MAKE THIS USE SAME REQUEST AS PRIOR !!!?????!???!?
-                /* graphResponseMessage.EnsureSuccessStatusCode();
-                var usersJson = await graphResponseMessage.Content.ReadAsStringAsync();
-                var users = JsonDocument.Parse(usersJson).RootElement.GetProperty("value");
+                usersResponse.EnsureSuccessStatusCode();
+                var users = graphResponseJson.RootElement;
 
-
-                // Create a DataTable to hold the user data
                 var dataTable = new DataTable();
-                dataTable.Columns.Add("UserId");
+                dataTable.Columns.Add("B2C");
                 dataTable.Columns.Add("DisplayName");
                 dataTable.Columns.Add("Mail");
+                dataTable.Columns.Add("issuerAssignedId");
 
-                // Iterate through all users and add them to the DataTable
-                foreach (var user in users.EnumerateArray())
+                var B2C = users.GetProperty("id").GetString();
+                var displayName = users.GetProperty("displayName").GetString();
+                var mail = users.GetProperty("mail").GetString();
+                var identities = users.GetProperty("identities").EnumerateArray();
+
+                foreach (var identity in identities)
                 {
-                    var userId = user.GetProperty("id").GetString();
-                    var displayName = user.GetProperty("displayName").GetString();
-                    var mail = user.GetProperty("mail").GetString();
-                    dataTable.Rows.Add(userId, displayName, mail);
-
-                    // Define the payload for the patch request if expiring passwrods
+                    if (identity.GetProperty("signInType").GetString() == "emailAddress")
+                    {
+                        var issuerAssignedId = identity.GetProperty("issuerAssignedId").GetString();
+                        dataTable.Rows.Add(B2C, displayName, issuerAssignedId); //mail, 
+                    }
+                    else
+                    {
+                        dataTable.Rows.Add(B2C, displayName, mail); //mail, 
+                        break;
+                    }
                 }
-                // Bind the DataTable to the DataGridView
-                GraphResultsDataGridView.DataSource = dataTable;*/
+
+                GraphResultsDataGridView.DataSource = dataTable;
                 SignInCallToActionLabel.Hide();
                 GraphResultsPanel.Show();
             }
-
 
             if (checkBox1.Checked == false && checkBox2.Checked == false && !string.IsNullOrEmpty(textBox5.Text))
             {
