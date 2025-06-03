@@ -5,8 +5,8 @@
 - [x] Enter IDs prior to creating PublicClientApplicationBuilder<br>
 - [x] Make Application 'Safer'<br>
 - [ ] LOG '918acea08535f43787dde02eec4c90591f102681' PREVIOUS QUERY PRIOR TO THIS COMMIT ID. ADD LEGACY QUERY FEATURE
-- [ ] 
-- [ ] 
+- [ ] CLEAR SCREEN
+- [ ] MAKE GRID VIEW SHOW PRINCIPAL ISSUER ID
 
 ```
 if (msalAuthenticationResult == null)
